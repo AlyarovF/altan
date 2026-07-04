@@ -1,0 +1,41 @@
+# Build context is the monorepo root (Turborepo `turbo prune` needs the whole workspace).
+# Keep the context lean & secret-free — everything below is regenerated inside the image.
+
+# dependencies (reinstalled with --frozen-lockfile in the image)
+**/node_modules
+.pnpm-store
+
+# build outputs
+**/dist
+**/build
+**/.next
+**/out
+**/.turbo
+*.tsbuildinfo
+
+# vcs / ci / tooling
+.git
+.github
+.husky
+.vscode
+.idea
+
+# env & secrets — NEVER copy these into an image
+**/.env
+**/.env.*
+!**/.env.example
+.env.production
+
+# local infra / docs / deploy artifacts (not needed to build app images)
+docker-compose.yml
+docker-compose.prod.yml
+deploy/
+DEPLOY.md
+docs
+**/*.md
+
+# runtime data & logs
+apps/api/uploads/*
+!apps/api/uploads/.gitkeep
+**/*.log
+coverage

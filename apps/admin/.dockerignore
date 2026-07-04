@@ -1,0 +1,15 @@
+# Images are built from the monorepo ROOT context, so the root .dockerignore is
+# the authoritative one. This file applies only if you `docker build` this app
+# directory directly. Keep both in sync.
+node_modules
+dist
+build
+.next
+out
+.turbo
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+*.log
+coverage

@@ -1,0 +1,45 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# builds
+dist/
+build/
+out/
+.next/
+.turbo/
+*.tsbuildinfo
+
+# next generated
+next-env.d.ts
+
+# generated openapi contract (re-exported from the running app)
+openapi.json
+
+# test / coverage
+coverage/
+
+# env & secrets
+.env
+.env.*
+!.env.example
+!.env.production.example
+# NOTE: real secrets — un-ignored per owner's request. Do NOT push to a public remote.
+!.env.production
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# os / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Claude Code local skill tooling (loyihaga aloqasi yo'q)
+.claude/skills/
+.claude/settings.local.json
+.claude/impeccable-plugin/

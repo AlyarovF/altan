@@ -1,0 +1,279 @@
+{
+  "nav": {
+    "home": "Bosh sahifa",
+    "catalog": "Katalog",
+    "materials": "Materiallar",
+    "capabilities": "Imkoniyatlar",
+    "sourcing": "Logistika",
+    "quality": "Sifat",
+    "news": "Tahlil",
+    "about": "Biz haqimizda",
+    "contact": "Aloqa"
+  },
+  "common": {
+    "requestQuote": "Taklif soʻrash",
+    "requestQuoteShort": "Taklif",
+    "cancel": "Bekor qilish",
+    "heroCta": "12 soatda taklif oling",
+    "viewCatalog": "Katalogni koʻrish",
+    "viewAllNews": "Barcha tahlillar",
+    "learnMore": "Batafsil",
+    "readMore": "Davomini oʻqish",
+    "loading": "Yuklanmoqda…",
+    "retry": "Qayta urinish",
+    "errorTitle": "Xatolik yuz berdi",
+    "errorBody": "Kontentni yuklab boʻlmadi. Qayta urinib koʻring.",
+    "notFoundTitle": "Sahifa topilmadi",
+    "notFoundBody": "Siz qidirayotgan sahifa mavjud emas yoki koʻchirilgan.",
+    "backHome": "Bosh sahifaga",
+    "minOrder": "Min. buyurtma",
+    "grade": "Marka",
+    "hsCode": "HS kodi",
+    "region": "Hudud",
+    "category": "Toifa"
+  },
+  "home": {
+    "heroTagline": "Kritik materiallar bozorlar bilan uchrashadigan joy.",
+    "heroTag": "Kritik xom ashyo boʻyicha jahon savdo uyi",
+    "trustBadges": [
+      "ISO 9001:2015",
+      "EXW/CIF/FOB/DDP",
+      "12 soatda javob",
+      "Butun dunyoga yetkazish"
+    ],
+    "heroLede": "Volfram, reniy, ferromolibden va karbid — Markaziy Osiyoda qazib olinadi, laboratoriyada tekshiriladi va istalgan Inkoterms shartida butun dunyoga yetkaziladi.",
+    "heroSecondary": "Imkoniyatlarimiz",
+    "deskTitle": "Savdo stoli",
+    "deskLive": "Yetkazish",
+    "deskMoq": "MOQ",
+    "deskPurity": "Proba",
+    "deskViewAll": "Toʻliq katalog",
+    "trustHeading": "Kritik materiallarni tashishda ishonchli sherik",
+    "capabilitiesEyebrow": "Imkoniyatlar",
+    "capabilitiesHeading": "Biz nima savdo qilamiz",
+    "capabilitiesSubheading": "Oʻtga chidamli metallar, karbid asboblar, texnik keramika va asboblar — spetsifikatsiya boʻyicha.",
+    "featuredEyebrow": "Katalog",
+    "featuredHeading": "Tanlangan materiallar",
+    "featuredSubheading": "Kon darajasidagi yetkazib berish, laboratoriya tekshiruvi, butun dunyo boʻylab.",
+    "coverageEyebrow": "Qamrov",
+    "coverageHeading": "Dengizga chiqishi yoʻq konlardan istalgan portgacha",
+    "coverageSubheading": "Markaziy Osiyoning dengizga chiqishi yoʻq, shuning uchun marshrutning oʻzi mahoratdir. Materialni temir yoʻl, avtomobil va dengiz orqali kerakli manzil va shartlarda yetkazamiz.",
+    "coverageCta": "Taʼminot va logistika",
+    "processEyebrow": "Jarayon",
+    "processHeading": "ALTAN qanday ishlaydi",
+    "processSubheading": "Kondan sizning portingizgacha — nazoratli va tekshiriladigan zanjir.",
+    "processStep": {
+      "source": "Har bir yetkazib beruvchi va partiyani tekshirib, kon va zavod darajasida sotib olamiz.",
+      "qualify": "Mustaqil laboratoriyalar proba, tozalik va zarracha oʻlchamini spetsifikatsiyaga tekshiradi.",
+      "ship": "Temir yoʻl, avtomobil va dengiz koridorlari materialni kerakli shartlarda olib chiqadi.",
+      "confirm": "Sertifikatlar, qadoqlash varaqlari va hisobotlar har bir buyurtmani toʻliq audit bilan yopadi."
+    },
+    "newsEyebrow": "Bozor tahlili",
+    "newsHeading": "Savdo stolidan signallar",
+    "newsSubheading": "Biz savdo qiladigan materiallar boʻyicha narx signallari va prognoz.",
+    "statsHeading": "ALTAN raqamlarda"
+  },
+  "cta": {
+    "eyebrow": "Taklif soʻrash",
+    "title": "Nima sotib olish kerakligini ayting.",
+    "body": "Material, marka va manzilni yuboring. Savdo boʻlimimiz 12 soat ichida Inkoterms boʻyicha narxli taklif bilan javob beradi.",
+    "secondary": "Boʻlim bilan bogʻlanish"
+  },
+  "capabilities": {
+    "explore": "Materiallarni koʻrish",
+    "leadKicker": "Shu yerdan boshlang",
+    "hero": {
+      "eyebrow": "Imkoniyatlar",
+      "title": "Biz nima savdo qilamiz",
+      "lede": "Kritik xom ashyoning aniq portfeli — oʻtga chidamli metallar, karbid asboblar, texnik keramika va asboblar — har biri spetsifikatsiya boʻyicha."
+    },
+    "trade": { "eyebrow": "Material toifalari", "title": "Toʻrt yoʻnalish, bitta standart" },
+    "quality": { "eyebrow": "Marka va sifat", "title": "Taxminan emas, spetsifikatsiya boʻyicha" },
+    "preview": { "eyebrow": "Katalogda", "title": "Namunaviy materiallar" }
+  },
+  "sourcing": {
+    "hero": {
+      "eyebrow": "Taʼminot va logistika",
+      "title": "Dengizga chiqishi yoʻq konlardan istalgan portgacha",
+      "lede": "ALTAN Markaziy Osiyoda manbadan sotib oladi va materialni multimodal koridorlar — temir yoʻl, avtomobil va dengiz orqali kerakli Inkoterms shartida olib chiqadi."
+    },
+    "corridor": {
+      "eyebrow": "Koridor",
+      "title": "Yagona nazoratli multimodal zanjir",
+      "lede": "Dengizga chiqishi yoʻqligi marshrutning oʻzi mahsulot ekanini bildiradi. Har bir bosqichni rejalashtiramiz va yukni sizning shartlaringizda topshiramiz.",
+      "n1": { "label": "Markaziy Osiyo", "sub": "Kon va zavod" },
+      "n2": { "label": "Temir yoʻl st.", "sub": "Bojxona yuklash" },
+      "n3": { "label": "Tranzit port", "sub": "Kaspiy / Qora dengiz" },
+      "n4": { "label": "Jahon bozori", "sub": "Sizning inkoterms" },
+      "l1": { "mode": "Temir yoʻl", "note": "EXW · FCA" },
+      "l2": { "mode": "Avto", "note": "Tranzit" },
+      "l3": { "mode": "Dengiz", "note": "FOB · CIF · DAP" }
+    },
+    "modes": { "eyebrow": "Multimodal", "title": "Har bir bosqich rejalashtirilgan" },
+    "incoterms": { "eyebrow": "Inkoterms", "title": "Sizning shartlaringizda yetkazamiz" }
+  },
+  "quality": {
+    "hero": {
+      "eyebrow": "Sifat va muvofiqlik",
+      "title": "Har bir partiya hujjatlashtirilgan va tekshirilgan",
+      "lede": "Kritik materiallar savdosi hujjatlarga bogʻliq. Har bir partiyani mustaqil laboratoriyalarda tekshiramiz va har bir kontragent va manzilni skrining qilamiz."
+    },
+    "assurance": { "eyebrow": "Kafolat", "title": "Yuklashdan oldin tekshirilgan" },
+    "docs": { "eyebrow": "Hujjatlar", "title": "Metallni harakatga keltiradigan hujjatlar" },
+    "compliance": { "eyebrow": "Muvofiqlik", "title": "Taxmin emas, tekshiruv" }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "Kompaniya",
+      "title": "Material atrofida qurilgan savdo uyi",
+      "lede": "ALTAN Markaziy Osiyo konlari va zavodlarini butun dunyodagi sanoat xaridorlari bilan bogʻlaydi — kon darajasidagi kirish, mustaqil tekshiruv va hujjatlashtirilgan zanjir bilan."
+    },
+    "story": { "eyebrow": "Biz kimmiz", "title": "Manbaga yaqin, xaridor oldida masʼul" },
+    "principles": { "eyebrow": "Qanday ishlaymiz", "title": "Har bir buyurtmada toʻrt tamoyil" }
+  },
+  "contact": {
+    "hero": {
+      "eyebrow": "Aloqa",
+      "title": "Savdo boʻlimi bilan gaplashing",
+      "lede": "Material, marka va manzilni ayting. 12 soat ichida Inkoterms boʻyicha narxli taklif bilan javob beramiz."
+    },
+    "rfq": {
+      "title": "Taklif soʻrash",
+      "note": "Odatda ish kunlari 12 soat ichida javob beramiz.",
+      "checklistTitle": "Koʻrsatish foydali"
+    },
+    "details": {
+      "eyebrow": "Savdo boʻlimi",
+      "title": "Toʻgʻridan-toʻgʻri aloqa",
+      "emailLabel": "Email",
+      "phoneLabel": "Telefon",
+      "addressLabel": "Ofis",
+      "slaLabel": "Javob",
+      "sla": "12 soat ichida"
+    },
+    "coverage": {
+      "eyebrow": "Qamrov",
+      "title": "Yagona savdo deski, global qamrov",
+      "lede": "Markaziy Osiyoda manbadan xarid qilinadi va dunyo bo‘ylab sizning Incoterms shartlaringizda yetkaziladi — so‘rovdan hisob-kitobgacha bitta mas’ul savdo deski.",
+      "d1": { "region": "Markaziy Osiyo", "note": "Manbadan xarid, tahlil va konsolidatsiya" },
+      "d2": {
+        "region": "Yevropa va MEA",
+        "note": "Temir yo‘l va dengiz yo‘laklari, DAP / DDP yetkazish"
+      },
+      "d3": { "region": "Osiyo-Tinch okeani", "note": "Multimodal tranzit, FOB / CIF shartlari" }
+    }
+  },
+  "footer": {
+    "rights": "Barcha huquqlar himoyalangan.",
+    "products": "Mahsulotlar",
+    "company": "Kompaniya",
+    "compliance": "Muvofiqlik",
+    "tagline": "Kritik materiallar bozorlar bilan uchrashadigan joy.",
+    "columns": [
+      {
+        "heading": "Mahsulotlar",
+        "links": [
+          { "label": "Metallar va qotishmalar", "href": "/catalog?category=metals-alloys" },
+          { "label": "Karbid asboblar", "href": "/catalog?category=carbide-tooling" },
+          { "label": "Texnik keramika", "href": "/catalog?category=technical-ceramics" },
+          { "label": "Asboblar va jihozlar", "href": "/catalog?category=instruments-equipment" }
+        ]
+      },
+      {
+        "heading": "Kompaniya",
+        "links": [
+          { "label": "Biz haqimizda", "href": "/about" },
+          { "label": "Bozor tahlili", "href": "/news" },
+          { "label": "Taklif soʻrash", "href": "/quote" },
+          { "label": "Aloqa", "href": "/contact" }
+        ]
+      },
+      {
+        "heading": "Muvofiqlik",
+        "links": [
+          { "label": "Eksport nazorati", "href": "/compliance" },
+          { "label": "Sifat va sertifikatlar", "href": "/quality" },
+          { "label": "Inkoterms", "href": "/incoterms" }
+        ]
+      }
+    ]
+  },
+  "catalog": {
+    "eyebrow": "Katalog",
+    "title": "Materiallar katalogi",
+    "subtitle": "ALTAN kritik xom ashyosini koʻrib chiqing. Toifa, hudud va belgi boʻyicha filtrlang.",
+    "search": "Materiallar, markalar, HS kodlari boʻyicha qidirish…",
+    "filters": "Filtrlar",
+    "allCategories": "Barcha toifalar",
+    "allRegions": "Barcha hududlar",
+    "allBadges": "Barcha belgilar",
+    "featuredOnly": "Faqat tanlangan",
+    "sort": "Saralash",
+    "sortDefault": "Tavsiya etilgan",
+    "sortNameAsc": "Nom A–Z",
+    "sortNameDesc": "Nom Z–A",
+    "sortNewest": "Eng yangi",
+    "resultsCount": "{count, plural, =0 {Material yoʻq} one {# material} other {# material}}",
+    "empty": "Filtrlarga mos material topilmadi.",
+    "clearFilters": "Filtrlarni tozalash",
+    "viewProduct": "Batafsil"
+  },
+  "product": {
+    "specs": "Texnik xususiyatlar",
+    "standard": "Standart",
+    "origin": "Kelib chiqishi",
+    "description": "Tavsif",
+    "requestForProduct": "Ushbu material boʻyicha taklif soʻrash",
+    "backToCatalog": "Katalogga qaytish",
+    "spec": {
+      "label": "Xususiyat",
+      "value": "Qiymat"
+    }
+  },
+  "news": {
+    "eyebrow": "Bozor tahlili",
+    "outlookLabel": "Prognoz",
+    "outlook": {
+      "FIRM": "Barqaror",
+      "BULLISH": "Oʻsuvchi",
+      "BEARISH": "Pasayuvchi",
+      "MIXED": "Aralash"
+    }
+  },
+  "quote": {
+    "title": "Taklif soʻrash",
+    "subtitle": "Nima kerakligini ayting. Savdo boʻlimimiz 12 soat ichida javob beradi.",
+    "companyName": "Kompaniya nomi",
+    "contactName": "Aloqa shaxsi",
+    "email": "Email",
+    "phone": "Telefon",
+    "country": "Mamlakat",
+    "incoterm": "Inkoterms",
+    "destination": "Manzil (port / shahar)",
+    "material": "Material",
+    "quantity": "Miqdor",
+    "unit": "Birlik",
+    "message": "Xabar",
+    "messagePlaceholder": "Spetsifikatsiyalar, kerakli marka, yetkazib berish muddati, boshqa tafsilotlar…",
+    "submit": "Soʻrov yuborish",
+    "submitting": "Yuborilmoqda…",
+    "addItem": "Yana material qoʻshish",
+    "removeItem": "Oʻchirish",
+    "success": "Rahmat — jamoamiz 12 soat ichida javob beradi.",
+    "successTitle": "Soʻrov qabul qilindi",
+    "yourRef": "Sizning raqamingiz",
+    "slaPromise": "Biz 12 soat ichida javob beramiz.",
+    "submitAnother": "Yana soʻrov yuborish",
+    "errorTitle": "Yuborib boʻlmadi",
+    "errorBody": "Maʼlumotlarni tekshirib, qayta urinib koʻring.",
+    "required": "Bu maydon majburiy",
+    "invalidEmail": "Toʻgʻri email kiriting",
+    "minItems": "Kamida bitta material qoʻshing"
+  },
+  "lang": {
+    "label": "Til",
+    "en": "English",
+    "ru": "Русский",
+    "uz": "Oʻzbekcha"
+  }
+}

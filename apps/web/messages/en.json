@@ -1,0 +1,438 @@
+{
+  "nav": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "materials": "Materials",
+    "capabilities": "Capabilities",
+    "sourcing": "Sourcing",
+    "quality": "Quality",
+    "news": "Insights",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "common": {
+    "requestQuote": "Request a quote",
+    "requestQuoteShort": "Get a quote",
+    "cancel": "Cancel",
+    "heroCta": "Get a quote in 12h",
+    "viewCatalog": "View catalog",
+    "viewAllNews": "All insights",
+    "learnMore": "Learn more",
+    "readMore": "Read more",
+    "loading": "Loading…",
+    "retry": "Try again",
+    "errorTitle": "Something went wrong",
+    "errorBody": "We could not load this content. Please try again.",
+    "notFoundTitle": "Page not found",
+    "notFoundBody": "The page you are looking for does not exist or has moved.",
+    "backHome": "Back to home",
+    "minOrder": "Min. order",
+    "grade": "Grade",
+    "hsCode": "HS code",
+    "region": "Region",
+    "category": "Category"
+  },
+  "home": {
+    "heroTagline": "Where Critical Materials Meet Markets.",
+    "heroTag": "Global Trading House for Critical Raw Materials",
+    "trustBadges": ["ISO 9001:2015", "EXW/CIF/FOB/DDP", "12h quote response", "Global delivery"],
+    "heroLede": "Tungsten, rhenium, ferromolybdenum and carbide — mine-sourced across Central Asia, lab-qualified, and delivered worldwide on any incoterm.",
+    "heroSecondary": "Explore capabilities",
+    "deskTitle": "Materials desk",
+    "deskLive": "Sourcing",
+    "deskMoq": "MOQ",
+    "deskPurity": "Assay",
+    "deskViewAll": "View full catalog",
+    "trustHeading": "Trusted to move critical materials",
+    "capabilitiesEyebrow": "Capabilities",
+    "capabilitiesHeading": "What we trade",
+    "capabilitiesSubheading": "Refractory metals, carbide tooling, technical ceramics and instruments — each sourced to specification.",
+    "featuredEyebrow": "Catalog",
+    "featuredHeading": "Featured materials",
+    "featuredSubheading": "Mine-level supply, lab-qualified, delivered worldwide.",
+    "coverageEyebrow": "Coverage",
+    "coverageHeading": "From landlocked mines to any port",
+    "coverageSubheading": "Central Asia is landlocked, so the corridor is the craft. We move material by rail, road and sea to the destination and incoterm you trade on.",
+    "coverageCta": "Sourcing & logistics",
+    "processEyebrow": "Process",
+    "processHeading": "How ALTAN works",
+    "processSubheading": "From the mine to your dock — a controlled, auditable chain.",
+    "processStep": {
+      "source": "We buy at the mine and smelter gate, auditing each supplier and lot before it enters our chain.",
+      "qualify": "Independent laboratories verify assay, purity and particle size against your specification.",
+      "ship": "Rail, road and sea corridors carry material out of a landlocked region on the incoterm you need.",
+      "confirm": "Certificates, packing lists and delivery reporting close every order with a full audit trail."
+    },
+    "newsEyebrow": "Market intelligence",
+    "newsHeading": "Signals from the desk",
+    "newsSubheading": "Price signals and outlook across the materials we trade.",
+    "statsHeading": "ALTAN by the numbers"
+  },
+  "cta": {
+    "eyebrow": "Request a quote",
+    "title": "Tell us what you need to source.",
+    "body": "Share the material, grade and destination. Our trade desk replies with a priced, incoterm-ready quotation within 12 hours.",
+    "secondary": "Talk to the desk"
+  },
+  "capabilities": {
+    "explore": "Explore materials",
+    "leadKicker": "Start here",
+    "cat": {
+      "metals-alloys": "Tungsten, rhenium and ferroalloys in metal, powder and briquette forms for downstream metallurgy.",
+      "carbide-tooling": "Tungsten-carbide inserts and blanks across ISO P/M/K application classes.",
+      "technical-ceramics": "Engineered ceramic components and powders for high-wear, high-temperature service.",
+      "instruments-equipment": "Measurement and laboratory instruments supporting materials qualification."
+    },
+    "hero": {
+      "eyebrow": "Capabilities",
+      "title": "What we trade",
+      "lede": "A focused book of critical raw materials — refractory metals, carbide tooling, technical ceramics and supporting instruments — each sourced, graded and documented to your specification."
+    },
+    "trade": {
+      "eyebrow": "Material categories",
+      "title": "Four books, one standard",
+      "lede": "Every category is sourced at mine or smelter level and qualified before it ships."
+    },
+    "quality": {
+      "eyebrow": "Grades & quality",
+      "title": "Specified, not approximated",
+      "lede": "We trade to defined grade, assay, particle size and packaging — with the paperwork to prove it.",
+      "i1": {
+        "title": "Grade & assay",
+        "body": "Purity and chemistry verified against your target grade by an independent laboratory."
+      },
+      "i2": {
+        "title": "Particle size & form",
+        "body": "Metal, powder, briquette or insert — specified to the form your process needs."
+      },
+      "i3": {
+        "title": "Packaging",
+        "body": "Sealed, labelled and export-packed to withstand multimodal transit."
+      },
+      "i4": {
+        "title": "HS classification",
+        "body": "Correct HS codes and origin for clean customs clearance in your market."
+      }
+    },
+    "preview": {
+      "eyebrow": "In the catalog",
+      "title": "Representative materials",
+      "lede": "A sample of what we move. Browse the full catalog for grades and minimums."
+    }
+  },
+  "sourcing": {
+    "hero": {
+      "eyebrow": "Sourcing & Logistics",
+      "title": "From landlocked mines to any port",
+      "lede": "ALTAN procures at the source in Central Asia and carries material out through multimodal corridors — rail, road and sea — on the incoterm you trade on."
+    },
+    "corridor": {
+      "eyebrow": "The corridor",
+      "title": "One controlled, multimodal chain",
+      "lede": "A landlocked origin means the route is the product. We plan each leg, bond the transit and hand over on your terms.",
+      "n1": { "label": "Central Asia", "sub": "Mine & smelter" },
+      "n2": { "label": "Rail head", "sub": "Bonded loading" },
+      "n3": { "label": "Transit port", "sub": "Caspian / Black Sea" },
+      "n4": { "label": "Global market", "sub": "Your incoterm" },
+      "l1": { "mode": "Rail", "note": "EXW · FCA" },
+      "l2": { "mode": "Road", "note": "Bonded transit" },
+      "l3": { "mode": "Sea", "note": "FOB · CIF · DAP" }
+    },
+    "modes": {
+      "eyebrow": "Multimodal",
+      "title": "Every leg, planned",
+      "lede": "Rail, road and sea combine into one accountable movement from source to destination.",
+      "i1": {
+        "title": "Rail",
+        "body": "Block trains and wagons move bulk material out of the region on scheduled paths."
+      },
+      "i2": {
+        "title": "Road",
+        "body": "Bonded trucking bridges smelters, railheads and ports where rail does not reach."
+      },
+      "i3": {
+        "title": "Sea",
+        "body": "Onward ocean freight via the Caspian, Black Sea and beyond to your destination port."
+      }
+    },
+    "incoterms": {
+      "eyebrow": "Incoterms",
+      "title": "We deliver on your terms",
+      "lede": "From ex-works pickup to delivered-duty-paid, we quote and ship on the incoterm that fits your operation.",
+      "EXW": {
+        "term": "Ex Works",
+        "desc": "You collect at our named point; we prepare and document the lot."
+      },
+      "FCA": {
+        "term": "Free Carrier",
+        "desc": "We hand over to your carrier at the agreed place, cleared for export."
+      },
+      "FOB": {
+        "term": "Free On Board",
+        "desc": "We load onto the vessel at the named port of shipment."
+      },
+      "CFR": {
+        "term": "Cost and Freight",
+        "desc": "We cover carriage to the destination port; risk passes on loading."
+      },
+      "CIF": {
+        "term": "Cost, Insurance & Freight",
+        "desc": "As CFR, with marine insurance to the destination port."
+      },
+      "DAP": {
+        "term": "Delivered At Place",
+        "desc": "We deliver to your named place, ready for unloading."
+      },
+      "DDP": {
+        "term": "Delivered Duty Paid",
+        "desc": "We deliver cleared and duties paid at your door."
+      }
+    }
+  },
+  "quality": {
+    "hero": {
+      "eyebrow": "Quality & Compliance",
+      "title": "Every lot, documented and screened",
+      "lede": "Trade in critical materials lives or dies on paperwork. We qualify each lot in independent laboratories and screen every counterparty and destination before we ship."
+    },
+    "assurance": {
+      "eyebrow": "Assurance",
+      "title": "Qualified before it ships",
+      "lede": "Nothing leaves the chain on trust alone.",
+      "i1": {
+        "title": "ISO 9001:2015",
+        "body": "A certified quality-management system governs how we source, test and document."
+      },
+      "i2": {
+        "title": "Independent assay",
+        "body": "Third-party laboratories verify chemistry, purity and particle size against your grade."
+      },
+      "i3": {
+        "title": "Certificate of Analysis",
+        "body": "Every lot ships with a CoA tying the material to its test results."
+      },
+      "i4": {
+        "title": "Certificate of Origin",
+        "body": "Documented origin supports tariff treatment and clean customs clearance."
+      }
+    },
+    "docs": {
+      "eyebrow": "Documentation",
+      "title": "The paperwork that moves the metal",
+      "lede": "Each order closes with a complete, auditable document set.",
+      "i1": {
+        "title": "Certificate of Analysis",
+        "body": "Assay, purity and particle size for the exact lot."
+      },
+      "i2": {
+        "title": "Certificate of Origin",
+        "body": "Country of origin for tariff and compliance."
+      },
+      "i3": { "title": "Commercial invoice", "body": "Priced, incoterm-stated and customs-ready." },
+      "i4": {
+        "title": "Packing list",
+        "body": "Net and gross weights, packaging and lot marking."
+      },
+      "i5": { "title": "Bill of lading / CMR", "body": "Transport title across each modal leg." },
+      "i6": { "title": "HS classification", "body": "Correct tariff codes for your destination." }
+    },
+    "compliance": {
+      "eyebrow": "Compliance",
+      "title": "Screened, not assumed",
+      "lede": "Critical materials carry export-control and sanctions exposure. We treat screening as a gate, not an afterthought.",
+      "i1": {
+        "title": "Sanctions screening",
+        "body": "Counterparties and destinations checked against consolidated sanctions lists."
+      },
+      "i2": {
+        "title": "Export controls",
+        "body": "Dual-use and export-control classification reviewed before we commit."
+      },
+      "i3": {
+        "title": "Audit trail",
+        "body": "Who priced, changed and shipped what — recorded and immutable."
+      }
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "Company",
+      "title": "A trading house built around the material",
+      "lede": "ALTAN links Central Asia's mines and smelters to industrial buyers worldwide — with mine-level access, independent qualification and a documented chain from source to settlement."
+    },
+    "story": {
+      "eyebrow": "Who we are",
+      "title": "Close to the source, accountable to the buyer",
+      "p1": "Central Asia holds some of the world's most important deposits of refractory and critical metals — but it is landlocked, and moving material to market takes more than a purchase order.",
+      "p2": "ALTAN was built to close that gap. We buy at the mine and smelter gate, qualify each lot in independent laboratories, and carry it out through the rail, road and sea corridors that connect the region to global industry.",
+      "p3": "The result is a single, auditable chain: buyers get material to specification, on their incoterm, with the certificates and screening that critical-material trade demands."
+    },
+    "principles": {
+      "eyebrow": "How we operate",
+      "title": "Four principles, every order",
+      "i1": {
+        "title": "Mine-level access",
+        "body": "We source at the origin, not through layers of intermediaries."
+      },
+      "i2": {
+        "title": "Independent qualification",
+        "body": "Third-party assay before material enters the chain."
+      },
+      "i3": {
+        "title": "Auditable chain",
+        "body": "Every price, change and handover is recorded and traceable."
+      },
+      "i4": {
+        "title": "Compliance-first",
+        "body": "Sanctions and export-control screening precede every commitment."
+      }
+    }
+  },
+  "contact": {
+    "hero": {
+      "eyebrow": "Contact",
+      "title": "Talk to the trade desk",
+      "lede": "Tell us the material, grade and destination. We reply with a priced, incoterm-ready quotation within 12 hours."
+    },
+    "rfq": {
+      "title": "Request a quote",
+      "body": "The fastest way to a price. Share your requirement and our desk gets to work.",
+      "note": "Typical reply within 12 hours on business days.",
+      "checklistTitle": "Helpful to include",
+      "c1": "Material and target grade / assay",
+      "c2": "Quantity and packaging",
+      "c3": "Destination and incoterm",
+      "c4": "Delivery window"
+    },
+    "details": {
+      "eyebrow": "Trade desk",
+      "title": "Direct lines",
+      "emailLabel": "Email",
+      "phoneLabel": "Phone",
+      "addressLabel": "Office",
+      "slaLabel": "Response",
+      "sla": "Within 12 hours"
+    },
+    "coverage": {
+      "eyebrow": "Coverage",
+      "title": "One desk, global reach",
+      "lede": "Sourced at the origin in Central Asia, delivered on your incoterms worldwide — one accountable trade desk from enquiry to settlement.",
+      "d1": { "region": "Central Asia", "note": "Origin sourcing, assay and consolidation" },
+      "d2": { "region": "Europe & MEA", "note": "Rail and sea corridors, DAP / DDP delivery" },
+      "d3": { "region": "Asia Pacific", "note": "Multimodal transit, FOB / CIF terms" }
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "products": "Products",
+    "company": "Company",
+    "compliance": "Compliance",
+    "tagline": "Where Critical Materials Meet Markets.",
+    "columns": [
+      {
+        "heading": "Products",
+        "links": [
+          { "label": "Metals & Alloys", "href": "/catalog?category=metals-alloys" },
+          { "label": "Carbide Tooling", "href": "/catalog?category=carbide-tooling" },
+          { "label": "Technical Ceramics", "href": "/catalog?category=technical-ceramics" },
+          { "label": "Instruments & Equipment", "href": "/catalog?category=instruments-equipment" }
+        ]
+      },
+      {
+        "heading": "Company",
+        "links": [
+          { "label": "About", "href": "/about" },
+          { "label": "Market News", "href": "/news" },
+          { "label": "Request a Quote", "href": "/quote" },
+          { "label": "Contact", "href": "/contact" }
+        ]
+      },
+      {
+        "heading": "Compliance",
+        "links": [
+          { "label": "Export Controls", "href": "/compliance" },
+          { "label": "Quality & Certificates", "href": "/quality" },
+          { "label": "Incoterms", "href": "/incoterms" }
+        ]
+      }
+    ]
+  },
+  "catalog": {
+    "eyebrow": "Catalog",
+    "title": "Materials catalog",
+    "subtitle": "Browse ALTAN's critical raw materials. Filter by category, region, and badge.",
+    "search": "Search materials, grades, HS codes…",
+    "filters": "Filters",
+    "allCategories": "All categories",
+    "allRegions": "All regions",
+    "allBadges": "All badges",
+    "featuredOnly": "Featured only",
+    "sort": "Sort",
+    "sortDefault": "Recommended",
+    "sortNameAsc": "Name A–Z",
+    "sortNameDesc": "Name Z–A",
+    "sortNewest": "Newest",
+    "resultsCount": "{count, plural, =0 {No materials} =1 {1 material} other {# materials}}",
+    "empty": "No materials match your filters.",
+    "clearFilters": "Clear all filters",
+    "viewProduct": "View details"
+  },
+  "product": {
+    "specs": "Specifications",
+    "standard": "Standard",
+    "origin": "Origin",
+    "description": "Description",
+    "requestForProduct": "Request quote for this product",
+    "backToCatalog": "Back to catalog",
+    "spec": {
+      "label": "Property",
+      "value": "Value"
+    }
+  },
+  "news": {
+    "eyebrow": "Market intelligence",
+    "outlookLabel": "Outlook",
+    "outlook": {
+      "FIRM": "Firm",
+      "BULLISH": "Bullish",
+      "BEARISH": "Bearish",
+      "MIXED": "Mixed"
+    }
+  },
+  "quote": {
+    "title": "Request a quote",
+    "subtitle": "Tell us what you need. Our trading desk replies within 12 hours.",
+    "companyName": "Company name",
+    "contactName": "Contact name",
+    "email": "Email",
+    "phone": "Phone",
+    "country": "Country",
+    "incoterm": "Incoterm",
+    "destination": "Destination (port / city)",
+    "material": "Material",
+    "quantity": "Quantity",
+    "unit": "Unit",
+    "message": "Message",
+    "messagePlaceholder": "Specs, target grade, delivery window, any other detail…",
+    "submit": "Submit request",
+    "submitting": "Submitting…",
+    "addItem": "Add another material",
+    "removeItem": "Remove",
+    "success": "Thank you — our team will reply within 12 hours.",
+    "successTitle": "Request received",
+    "yourRef": "Your reference",
+    "slaPromise": "We reply within 12 hours.",
+    "submitAnother": "Submit another request",
+    "errorTitle": "Could not submit",
+    "errorBody": "Please check your details and try again.",
+    "required": "This field is required",
+    "invalidEmail": "Enter a valid email address",
+    "minItems": "Add at least one material"
+  },
+  "lang": {
+    "label": "Language",
+    "en": "English",
+    "ru": "Русский",
+    "uz": "Oʻzbekcha"
+  }
+}

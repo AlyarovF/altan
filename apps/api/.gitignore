@@ -1,0 +1,3 @@
+# Uploaded media (local dev storage; configurable via MEDIA_DIR). Keep the dir, ignore files.
+/uploads/*
+!/uploads/.gitkeep

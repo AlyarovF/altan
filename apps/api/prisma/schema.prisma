@@ -1,0 +1,465 @@
+// ALTAN — Prisma schema (PostgreSQL).
+//
+// Enum names here MUST mirror the TS enums in `packages/shared` (single source of truth
+// for the frontends). Translatable product/news text lives in child translation tables
+// (ProductTranslation / NewsTranslation); generic UI/i18n strings live in `Translation`.
+//
+// Money/price fields are DISPLAY STRINGS in this phase ("$292 APT/MTU"), not arithmetic —
+// see step 02 ALTAN notes. Switch to Decimal + currency if real pricing/orders arrive.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Enums (mirror packages/shared)
+// ---------------------------------------------------------------------------
+
+enum LocaleCode {
+  EN
+  RU
+  UZ
+}
+
+enum Incoterm {
+  EXW
+  FCA
+  FOB
+  CFR
+  CIF
+  DAP
+  DDP
+}
+
+enum Role {
+  ADMIN
+  SALES
+  EDITOR
+  VIEWER
+}
+
+enum ProductStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum BadgeCode {
+  HOT
+  NEW
+}
+
+enum Outlook {
+  FIRM
+  BULLISH
+  BEARISH
+  MIXED
+}
+
+enum ChangeDirection {
+  UP
+  DOWN
+  FLAT
+}
+
+enum QuoteStatus {
+  NEW
+  IN_REVIEW
+  QUOTED
+  WON
+  LOST
+  CLOSED
+}
+
+enum QuoteSource {
+  WEB
+  ADMIN
+  API
+}
+
+enum SiteStatGroup {
+  HERO
+  PROCESS_BAR
+}
+
+enum MediaType {
+  IMAGE
+  DOCUMENT
+  VIDEO
+}
+
+// ---------------------------------------------------------------------------
+// Taxonomy
+// ---------------------------------------------------------------------------
+
+model Category {
+  id        String    @id @default(uuid()) @db.Uuid
+  slug      String    @unique
+  name      String
+  sortOrder Int       @default(0)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  products  Product[]
+
+  @@index([sortOrder])
+}
+
+model Region {
+  id           String              @id @default(uuid()) @db.Uuid
+  code         String              @unique // e.g. "ca", "eu"
+  name         String // EN base name + fallback for any locale without a translation
+  sortOrder    Int                 @default(0)
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  products     Product[]
+  translations RegionTranslation[]
+
+  @@index([sortOrder])
+}
+
+// Per-locale override for a Region name. EN lives on Region.name (base + fallback);
+// RU/UZ overrides live here. Mirrors the SiteContentTranslation / ProductTranslation pattern.
+model RegionTranslation {
+  id       String     @id @default(uuid()) @db.Uuid
+  regionId String     @db.Uuid
+  locale   LocaleCode
+  name     String
+  region   Region     @relation(fields: [regionId], references: [id], onDelete: Cascade)
+
+  @@unique([regionId, locale])
+  @@index([locale])
+}
+
+model Badge {
+  code     BadgeCode      @id // HOT | NEW
+  label    String // "Hot", "NEW"
+  emoji    String // 🔥, ✨
+  color    String // hex / token for the chip
+  products ProductBadge[]
+}
+
+// ---------------------------------------------------------------------------
+// Products
+// ---------------------------------------------------------------------------
+
+model Product {
+  id               String        @id @default(uuid()) @db.Uuid
+  slug             String        @unique
+  name             String
+  categoryId       String        @db.Uuid
+  regionId         String        @db.Uuid
+  featured         Boolean       @default(false)
+  grade            String? // e.g. "W ≥ 96.3%"
+  hsCode           String? // Harmonized System customs code
+  standard         String? // OʻzMSt national standard
+  origin           String? // country/region of origin
+  minOrderQty      Decimal?      @db.Decimal(18, 3)
+  minOrderUnit     String? // kg, t, MTU, pcs…
+  shortDescription String?
+  description      String?
+  imageUrl         String? // primary/display image URL (served from MEDIA_DIR or external)
+  status           ProductStatus @default(DRAFT)
+  sortOrder        Int           @default(0)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  category     Category             @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  region       Region               @relation(fields: [regionId], references: [id], onDelete: Restrict)
+  specs        ProductSpec[]
+  badges       ProductBadge[]
+  media        MediaAsset[]
+  translations ProductTranslation[]
+  quoteItems   QuoteItem[]
+
+  @@index([categoryId])
+  @@index([regionId])
+  @@index([status])
+  @@index([featured])
+  @@index([sortOrder])
+}
+
+model ProductSpec {
+  id        String  @id @default(uuid()) @db.Uuid
+  productId String  @db.Uuid
+  label     String // "Purity", "Particle size"…
+  value     String
+  unit      String?
+  sortOrder Int     @default(0)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+model ProductTranslation {
+  id               String     @id @default(uuid()) @db.Uuid
+  productId        String     @db.Uuid
+  locale           LocaleCode
+  name             String
+  shortDescription String?
+  description      String?
+  product          Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, locale])
+  @@index([locale])
+}
+
+model ProductBadge {
+  productId String    @db.Uuid
+  badgeCode BadgeCode
+  product   Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  badge     Badge     @relation(fields: [badgeCode], references: [code], onDelete: Cascade)
+
+  @@id([productId, badgeCode])
+  @@index([badgeCode])
+}
+
+// ---------------------------------------------------------------------------
+// News / market intelligence
+// ---------------------------------------------------------------------------
+
+model NewsArticle {
+  id              String            @id @default(uuid()) @db.Uuid
+  slug            String            @unique
+  title           String
+  commodity       String // e.g. "Tungsten (APT)"
+  publishedAt     DateTime?
+  priceLabel      String? // display string, e.g. "$292 APT/MTU"
+  changeLabel     String? // "+2.1%"
+  changeDirection ChangeDirection   @default(FLAT)
+  outlook         Outlook           @default(FIRM)
+  summary         String?
+  body            String?
+  status          ProductStatus     @default(DRAFT)
+  sortOrder       Int               @default(0)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  translations    NewsTranslation[]
+
+  @@index([status])
+  @@index([publishedAt])
+  @@index([sortOrder])
+}
+
+model NewsTranslation {
+  id        String      @id @default(uuid()) @db.Uuid
+  articleId String      @db.Uuid
+  locale    LocaleCode
+  title     String
+  summary   String?
+  body      String?
+  article   NewsArticle @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  @@unique([articleId, locale])
+  @@index([locale])
+}
+
+// ---------------------------------------------------------------------------
+// Site content (homepage process steps, stats, free-form content, i18n)
+// ---------------------------------------------------------------------------
+
+model ProcessStep {
+  id           String                   @id @default(uuid()) @db.Uuid
+  stepNo       Int
+  key          String                   @unique // source | qualify | ship | confirm
+  title        String // EN base + fallback
+  subtitle     String? // EN base + fallback
+  icon         String?
+  sortOrder    Int                      @default(0)
+  createdAt    DateTime                 @default(now())
+  updatedAt    DateTime                 @updatedAt
+  translations ProcessStepTranslation[]
+
+  @@index([sortOrder])
+}
+
+// Per-locale override for a ProcessStep. EN lives on ProcessStep.title/subtitle (base +
+// fallback); RU/UZ overrides live here. Mirrors the SiteContentTranslation pattern.
+model ProcessStepTranslation {
+  id            String      @id @default(uuid()) @db.Uuid
+  processStepId String      @db.Uuid
+  locale        LocaleCode
+  title         String
+  subtitle      String?
+  processStep   ProcessStep @relation(fields: [processStepId], references: [id], onDelete: Cascade)
+
+  @@unique([processStepId, locale])
+  @@index([locale])
+}
+
+model SiteStat {
+  id           String                @id @default(uuid()) @db.Uuid
+  key          String                @unique
+  label        String // EN base + fallback
+  value        String // display string ("26+", "12h"); EN base + fallback, may differ per locale
+  group        SiteStatGroup         @default(HERO)
+  sortOrder    Int                   @default(0)
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+  translations SiteStatTranslation[]
+
+  @@index([group, sortOrder])
+}
+
+// Per-locale override for a SiteStat. EN lives on SiteStat.label/value (base + fallback);
+// RU/UZ overrides live here. `value` is a display string that may localize ("26+", "12h").
+model SiteStatTranslation {
+  id         String     @id @default(uuid()) @db.Uuid
+  siteStatId String     @db.Uuid
+  locale     LocaleCode
+  label      String
+  value      String
+  siteStat   SiteStat   @relation(fields: [siteStatId], references: [id], onDelete: Cascade)
+
+  @@unique([siteStatId, locale])
+  @@index([locale])
+}
+
+model SiteContent {
+  id           String                   @id @default(uuid()) @db.Uuid
+  key          String                   @unique // companyName, tagline, trustBadges, footer…
+  valueJson    Json // default / EN base value + fallback for any locale without a translation
+  createdAt    DateTime                 @default(now())
+  updatedAt    DateTime                 @updatedAt
+  translations SiteContentTranslation[]
+}
+
+// Per-locale override for a SiteContent key. EN lives on SiteContent.valueJson (the base +
+// fallback); RU/UZ overrides live here. valueJson keeps the same "any JSON" freedom as the
+// base (scalar / array / object). Mirrors the ProductTranslation / NewsTranslation pattern.
+model SiteContentTranslation {
+  id            String      @id @default(uuid()) @db.Uuid
+  siteContentId String      @db.Uuid
+  locale        LocaleCode
+  valueJson     Json
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  siteContent   SiteContent @relation(fields: [siteContentId], references: [id], onDelete: Cascade)
+
+  @@unique([siteContentId, locale])
+  @@index([locale])
+}
+
+model Translation {
+  id        String     @id @default(uuid()) @db.Uuid
+  namespace String     @default("common")
+  key       String
+  locale    LocaleCode
+  value     String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@unique([namespace, key, locale])
+  @@index([namespace, locale])
+}
+
+// ---------------------------------------------------------------------------
+// Quotes (RFQ)
+// ---------------------------------------------------------------------------
+
+model QuoteRequest {
+  id          String      @id @default(uuid()) @db.Uuid
+  ref         String      @unique // human-friendly reference, e.g. "RFQ-2026-000123"
+  companyName String
+  contactName String
+  email       String
+  phone       String?
+  country     String
+  incoterm    Incoterm
+  destination String
+  message         String?
+  status          QuoteStatus @default(NEW)
+  source          QuoteSource @default(WEB)
+  slaDueAt        DateTime? // createdAt + 12h SLA
+  respondedAt     DateTime?
+  responseMessage String? // message sent to the buyer on respond
+  internalNotes   String? // private sales notes (never returned publicly)
+  createdAt       DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  items       QuoteItem[]
+
+  @@index([status])
+  @@index([createdAt])
+  @@index([email])
+}
+
+model QuoteItem {
+  id                  String       @id @default(uuid()) @db.Uuid
+  quoteId             String       @db.Uuid
+  productId           String?      @db.Uuid
+  productNameSnapshot String // captured at submission time (product may change later)
+  quantity            Decimal      @db.Decimal(18, 3)
+  unit                String
+  notes               String?
+  quote               QuoteRequest @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  product             Product?     @relation(fields: [productId], references: [id], onDelete: SetNull)
+
+  @@index([quoteId])
+  @@index([productId])
+}
+
+// ---------------------------------------------------------------------------
+// Users, audit, media
+// ---------------------------------------------------------------------------
+
+model User {
+  id            String         @id @default(uuid()) @db.Uuid
+  email         String         @unique
+  passwordHash  String
+  name          String
+  role          Role           @default(VIEWER)
+  isActive      Boolean        @default(true)
+  lastLoginAt   DateTime?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  auditLogs     AuditLog[]
+  refreshTokens RefreshToken[]
+
+  @@index([role])
+}
+
+model RefreshToken {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @db.Uuid
+  tokenHash String // argon2 hash of the refresh token
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([tokenHash])
+}
+
+model AuditLog {
+  id        String   @id @default(uuid()) @db.Uuid
+  actorId   String?  @db.Uuid
+  action    String // CREATE | UPDATE | DELETE | STATUS_CHANGE | LOGIN …
+  entity    String // "Product", "QuoteRequest"…
+  entityId  String?
+  before    Json?
+  after     Json?
+  createdAt DateTime @default(now())
+  actor     User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([entity, entityId])
+  @@index([actorId])
+  @@index([createdAt])
+}
+
+model MediaAsset {
+  id        String    @id @default(uuid()) @db.Uuid
+  url       String
+  alt       String?
+  type      MediaType @default(IMAGE)
+  width     Int?
+  height    Int?
+  productId String?   @db.Uuid
+  createdAt DateTime  @default(now())
+  product   Product?  @relation(fields: [productId], references: [id], onDelete: SetNull)
+
+  @@index([productId])
+}

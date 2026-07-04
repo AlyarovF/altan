@@ -1,0 +1,66 @@
+# ALTAN edge reverse proxy — single public entry point.
+# Rendered by the official nginx image's envsubst at startup from ${DOMAIN} and
+# ${ADMIN_HOST} (only these two are substituted; nginx runtime vars like $host
+# are preserved). TLS is terminated here in production — see DEPLOY.md.
+
+# Trust the standard docker embedded DNS so upstream service names resolve.
+map $http_upgrade $connection_upgrade {
+  default upgrade;
+  ''      close;
+}
+
+# --- Public site + API/media (also the default server for IP / health checks) ---
+server {
+  listen 80 default_server;
+  server_name ${DOMAIN};
+
+  client_max_body_size 25m;
+
+  # API + uploaded media -> the api service (same-origin, no CORS).
+  location /api/ {
+    proxy_pass http://api:3001;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+  }
+  location /media/ {
+    proxy_pass http://api:3001;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+  }
+
+  # Everything else -> the Next.js public site.
+  location / {
+    proxy_pass http://web:3000;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+  }
+}
+
+# --- Admin dashboard on its own host (admin.<domain> by default) -------------
+# The admin container serves the SPA and self-proxies /api + /media to the api,
+# so the edge just forwards the whole host to it.
+server {
+  listen 80;
+  server_name ${ADMIN_HOST};
+
+  client_max_body_size 25m;
+
+  location / {
+    proxy_pass http://admin:80;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+  }
+}

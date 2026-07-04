@@ -1,0 +1,39 @@
+# Local development infrastructure for ALTAN.
+# Mail is intentionally NOT included here — the project owner provides the mail provider
+# (the API talks to an abstract MailerService port; see plan step 07).
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: altan-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: altan
+      POSTGRES_PASSWORD: altan
+      POSTGRES_DB: altan
+    ports:
+      - '${POSTGRES_PORT:-5432}:5432'
+    volumes:
+      - altan_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U altan -d altan']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: altan-redis
+    restart: unless-stopped
+    ports:
+      - '${REDIS_PORT:-6379}:6379'
+    volumes:
+      - altan_redis:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  altan_pg:
+  altan_redis:

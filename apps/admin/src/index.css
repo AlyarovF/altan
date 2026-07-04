@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* antd ships its own reset; we only add box-sizing + a sensible page background. */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+/* Base body font. Without this html/body compute to the UA serif default;
+   only .ant-app inherits Montserrat, so any content outside it (portals,
+   plain nodes) fell back to Times New Roman. */
+body {
+  font-family:
+    'Montserrat',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+}
+
+#root {
+  background: #f6f7f9;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
