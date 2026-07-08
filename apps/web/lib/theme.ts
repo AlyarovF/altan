@@ -3,16 +3,16 @@ import { palette } from './tokens';
 
 /**
  * Ant Design v5 theme — the component-layer twin of `tailwind.config.ts`.
- * Values below (brass primary, cool neutrals, radii, control heights, type)
+ * Values below (gold primary, blue-grey neutrals, radii, control heights, type)
  * mirror the Tailwind tokens so antd components and Tailwind layout speak one
  * visual language: the "trading desk / assay certificate" system.
  */
 export const antdTheme: ThemeConfig = {
   token: {
-    // Interactive brass. The bright brand brass (amber.DEFAULT, used for
-    // decorative accents) only yields ~3.0:1 with white button text — below WCAG
-    // AA. The deeper brand brass (amber.deep) gives white ≈4.73:1, so every
-    // primary button (the main place white-on-brass appears) passes AA from this
+    // Interactive gold. The brand gold (amber.DEFAULT, used for decorative
+    // accents) only yields ~2.4:1 with white button text — below WCAG AA.
+    // The deeper gold (amber.deep) gives white ≈4.72:1, so every primary
+    // button (the main place white-on-gold appears) passes AA from this
     // one token. All colours below reference the shared palette in `lib/tokens.ts`.
     colorPrimary: palette.amber.deep,
     colorInfo: palette.amber.DEFAULT,
@@ -50,7 +50,8 @@ export const antdTheme: ThemeConfig = {
     },
     Input: {
       colorBorder: palette.steel[200],
-      activeShadow: '0 0 0 3px rgba(200,136,28,0.12)',
+      // 201,162,39 = amber.DEFAULT #C9A227.
+      activeShadow: '0 0 0 3px rgba(201,162,39,0.12)',
     },
     Select: {
       colorBorder: palette.steel[200],

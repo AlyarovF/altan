@@ -5,9 +5,9 @@ import { palette } from './lib/tokens';
  * ALTAN public site — Tailwind design tokens.
  *
  * Design language: "commodity trading desk / assay certificate." A disciplined
- * graphite-ink canvas, a single molten-brass accent, cool-steel neutrals, and a
- * ledger-like use of tabular figures (Montserrat everywhere; the figure role just
- * enables tabular/lining numerals). Everything below is the single source of
+ * deep-navy canvas, a single gold accent, blue-grey neutrals, a serif display
+ * face (Playfair Display) over Montserrat body/UI, and a ledger-like use of
+ * tabular figures. Everything below is the single source of
  * truth for layout/utility styling and is kept in sync with the Ant Design
  * `ConfigProvider` theme (see `lib/theme.ts`) so components and layout agree.
  *
@@ -23,9 +23,9 @@ const config: Config = {
     extend: {
       // Brand palette lives in `lib/tokens.ts` (shared with the antd theme in
       // `lib/theme.ts`) so utility and component layers can't drift.
-      // - ink: graphite near-black canvas for dark surfaces.
-      // - steel: cool neutrals for borders/surfaces/muted text.
-      // - amber: the single molten-brass accent, used with restraint.
+      // - ink: deep-navy canvas for dark surfaces.
+      // - steel: blue-grey neutrals for borders/surfaces/muted text.
+      // - amber: the single gold accent, used with restraint.
       // - signal.upBright: brighter green reserved for small text on dark surfaces
       //   (5.8:1 on ink vs. `up`'s 3.84:1); do not use on light surfaces.
       colors: {
@@ -35,9 +35,9 @@ const config: Config = {
         signal: palette.signal,
       },
       fontFamily: {
-        // Montserrat everywhere — hierarchy comes from weight/size, not family.
+        // Montserrat for body/UI; the display role is the brand serif.
         sans: ['var(--font-sans)', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'Georgia', 'serif'],
         // Figure / ledger role: Montserrat with tabular + lining numerals so HS
         // codes, prices, grades and stat rails align in columns. Not monospaced.
         mono: [
@@ -46,15 +46,11 @@ const config: Config = {
         ],
       },
       fontSize: {
-        // Fluid display sizes for the hero + page heroes.
-        'display-lg': [
-          'clamp(2.6rem, 5.2vw, 4.5rem)',
-          { lineHeight: '1.02', letterSpacing: '-0.02em' },
-        ],
-        'display-md': [
-          'clamp(2.1rem, 3.6vw, 3.25rem)',
-          { lineHeight: '1.05', letterSpacing: '-0.018em' },
-        ],
+        // Fluid display sizes for the hero + page heroes. Zero tracking — the
+        // serif display face carries its own fit (the old negative tracking was
+        // tuned for the geometric sans).
+        'display-lg': ['clamp(2.6rem, 5.2vw, 4.5rem)', { lineHeight: '1.06', letterSpacing: '0' }],
+        'display-md': ['clamp(2.1rem, 3.6vw, 3.25rem)', { lineHeight: '1.1', letterSpacing: '0' }],
       },
       letterSpacing: {
         eyebrow: '0.2em',
@@ -68,16 +64,18 @@ const config: Config = {
         card: '14px',
       },
       boxShadow: {
-        // Soft, low-contrast elevation — industrial, not glossy.
-        card: '0 1px 2px rgba(12,15,20,0.04), 0 10px 30px -18px rgba(12,15,20,0.20)',
-        lift: '0 20px 50px -24px rgba(12,15,20,0.32)',
+        // Soft, low-contrast elevation — industrial, not glossy. Shadow color is
+        // the navy ink (16,26,48 = #101A30) so elevation stays on-palette.
+        card: '0 1px 2px rgba(16,26,48,0.04), 0 10px 30px -18px rgba(16,26,48,0.20)',
+        lift: '0 20px 50px -24px rgba(16,26,48,0.32)',
         inset: 'inset 0 1px 0 rgba(255,255,255,0.04)',
       },
       backgroundImage: {
+        // 132,148,172 = steel-400 #8494AC; 227,190,76 = amber.bright #E3BE4C.
         'grid-faint':
-          'linear-gradient(to right, rgba(140,150,164,0.10) 1px, transparent 1px), linear-gradient(to bottom, rgba(140,150,164,0.10) 1px, transparent 1px)',
+          'linear-gradient(to right, rgba(132,148,172,0.10) 1px, transparent 1px), linear-gradient(to bottom, rgba(132,148,172,0.10) 1px, transparent 1px)',
         'grid-blueprint':
-          'linear-gradient(to right, rgba(233,162,39,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(233,162,39,0.06) 1px, transparent 1px)',
+          'linear-gradient(to right, rgba(227,190,76,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(227,190,76,0.06) 1px, transparent 1px)',
       },
       keyframes: {
         'fade-up': {

@@ -12,44 +12,49 @@
  * anchors, each internally deduped.
  */
 export const palette = {
-  // Graphite ink — cool near-black canvas for dark surfaces.
+  // Deep-navy ink — the brand's dark canvas (per the ALTAN identity: navy,
+  // gold, white). Token keeps the `ink` name so no Tailwind class churns.
   ink: {
-    DEFAULT: '#0C0F14',
-    900: '#0C0F14',
-    800: '#12161C',
-    700: '#191E26',
-    600: '#232A34',
-    soft: '#191E26',
-    muted: '#3A424E',
+    DEFAULT: '#101A30',
+    900: '#101A30',
+    800: '#16233E',
+    700: '#1C2C4C',
+    600: '#27395E',
+    soft: '#1C2C4C',
+    muted: '#3E4E70',
   },
-  // Cool-steel neutrals — borders, surfaces, muted text.
+  // Blue-grey neutrals — borders, surfaces, muted text; tinted toward the navy
+  // canvas so light and dark surfaces share one temperature.
   steel: {
-    50: '#F5F6F8',
-    100: '#ECEEF1',
-    200: '#DEE2E7',
-    300: '#C1C8D1',
-    400: '#8C96A4',
-    500: '#5E6876',
-    600: '#454E5A',
-    700: '#333A44',
-    800: '#232A34',
-    900: '#12161C',
+    50: '#F4F6FA',
+    100: '#E9EDF4',
+    200: '#D8DFEA',
+    300: '#B7C2D4',
+    400: '#8494AC',
+    500: '#5A6B87',
+    600: '#43536D',
+    700: '#324259',
+    800: '#24314A',
+    900: '#131C30',
   },
-  // Molten-brass accent — the single brand color, used with restraint.
+  // Gold accent — the single brand color (the crossbar of the A-mark), used
+  // with restraint. `deep` is the interactive gold: white on it is 4.72:1 (AA),
+  // so it drives antd's colorPrimary.
   amber: {
-    DEFAULT: '#C8881C',
-    bright: '#E9A227',
-    deep: '#9A6A00',
-    tint: '#F3E7CE',
-    // AA-safe eyebrow brass: deeper than `deep` so the tracked 11px eyebrow clears
-    // 4.5:1 on BOTH white and steel-50. Deliberately off the display ramp.
-    eyebrow: '#8A5E00',
+    DEFAULT: '#C9A227',
+    bright: '#E3BE4C',
+    deep: '#8F6F14',
+    tint: '#F5EBCB',
+    // AA-safe eyebrow gold: deeper than `deep` so the tracked 11px eyebrow clears
+    // 4.5:1 on BOTH white (5.86:1) and steel-50 (5.42:1). Deliberately off the
+    // display ramp.
+    eyebrow: '#7A6210',
   },
-  // Market signals — muted, never louder than the brass.
+  // Market signals — muted, never louder than the gold.
   signal: {
     up: '#2E7D5B',
     upBright: '#3E9E73',
     down: '#C8503C',
-    flat: '#8C96A4',
+    flat: '#8494AC',
   },
 } as const;

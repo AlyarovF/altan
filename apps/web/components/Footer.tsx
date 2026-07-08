@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { MailOutlined, PhoneOutlined, EnvironmentOutlined } from '@ant-design/icons';
 import { Link } from '@/i18n/routing';
-import { BrandMark } from './BrandMark';
+import { BrandMark, BrandWordmark } from './BrandMark';
 import type { FooterContent } from '@altan/shared';
 
 type FooterColumns = NonNullable<FooterContent['columns']>;
@@ -28,9 +28,11 @@ export function Footer({ companyName, footer }: { companyName: string; footer?: 
       />
       <div className="shell grid gap-12 py-16 md:grid-cols-[1.4fr_repeat(3,1fr)]">
         <div className="max-w-xs">
-          <div className="flex items-center gap-2.5">
-            <BrandMark size={32} />
-            <span className="font-display text-lg text-white">{companyName}</span>
+          {/* Logotype is decorative; the accessible company name lives in the
+              copyright line below. */}
+          <div className="flex items-center gap-2.5" aria-label={companyName}>
+            <BrandMark size={34} />
+            <BrandWordmark />
           </div>
           <p className="mt-4 font-display text-base text-steel-200">{tagline}</p>
           <ul className="mt-6 space-y-2 text-sm">

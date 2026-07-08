@@ -8,7 +8,7 @@ import { ChevronDown, ArrowRight } from 'lucide-react';
 import type { Category } from '@altan/shared';
 import { Link, usePathname } from '@/i18n/routing';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import { BrandMark } from './BrandMark';
+import { BrandMark, BrandWordmark } from './BrandMark';
 import { useQuoteModal } from '@/features/quote/QuoteModalContext';
 
 /** Flat nav links (Materials is a dropdown, handled separately). */
@@ -78,10 +78,8 @@ export function Header({
     <header className="sticky top-0 z-40 border-b border-white/10 bg-ink-900/90 backdrop-blur supports-[backdrop-filter]:bg-ink-900/75">
       <div className="shell flex h-16 items-center justify-between gap-4">
         <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label={companyName}>
-          <BrandMark size={32} />
-          <span className="whitespace-nowrap font-display text-[17px] font-medium tracking-tight text-white">
-            {companyName}
-          </span>
+          <BrandMark size={34} />
+          <BrandWordmark />
         </Link>
 
         <nav className={`${navShow} whitespace-nowrap`} aria-label="Primary">
@@ -182,10 +180,14 @@ export function Header({
         placement="right"
         width={300}
         closeIcon={<span className="text-white">✕</span>}
-        title={<span className="text-white">{companyName}</span>}
+        title={
+          <span aria-label={companyName}>
+            <BrandWordmark />
+          </span>
+        }
         styles={{
-          body: { background: '#0C0F14' },
-          header: { background: '#0C0F14', borderColor: 'rgba(255,255,255,0.1)' },
+          body: { background: '#101A30' },
+          header: { background: '#101A30', borderColor: 'rgba(255,255,255,0.1)' },
         }}
       >
         <nav className="flex flex-col gap-1" aria-label="Mobile">

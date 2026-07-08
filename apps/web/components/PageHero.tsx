@@ -22,7 +22,8 @@ function HeroPlate() {
           {/* Blueprint grid */}
           <defs>
             <pattern id="hp-grid" width="32" height="32" patternUnits="userSpaceOnUse">
-              <path d="M32 0H0V32" fill="none" stroke="rgba(140,150,164,0.12)" strokeWidth="1" />
+              {/* 132,148,172 = steel-400 #8494AC */}
+              <path d="M32 0H0V32" fill="none" stroke="rgba(132,148,172,0.12)" strokeWidth="1" />
             </pattern>
           </defs>
           <rect x="0" y="0" width="320" height="150" fill="url(#hp-grid)" />
@@ -30,7 +31,7 @@ function HeroPlate() {
           <path
             d="M 30 116 C 110 60, 210 60, 290 34"
             fill="none"
-            stroke="#C8881C"
+            stroke="#C9A227"
             strokeWidth="2"
             strokeDasharray="2 7"
             strokeLinecap="round"
@@ -41,8 +42,8 @@ function HeroPlate() {
             [290, 34],
           ].map(([cx, cy]) => (
             <g key={`${cx}-${cy}`}>
-              <circle cx={cx} cy={cy} r="7" fill="#0C0F14" stroke="#E9A227" strokeWidth="2" />
-              <circle cx={cx} cy={cy} r="2.4" fill="#E9A227" />
+              <circle cx={cx} cy={cy} r="7" fill="#101A30" stroke="#E3BE4C" strokeWidth="2" />
+              <circle cx={cx} cy={cy} r="2.4" fill="#E3BE4C" />
             </g>
           ))}
         </svg>

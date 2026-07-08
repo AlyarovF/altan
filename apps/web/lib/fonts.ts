@@ -1,14 +1,14 @@
-import { Montserrat } from 'next/font/google';
+import { Montserrat, Playfair_Display } from 'next/font/google';
 
 /**
- * Type system — **Montserrat everywhere** (display, body/UI, and figures).
+ * Type system — **Playfair Display (display) over Montserrat (body/UI/figures)**.
  *
- * A single geometric sans drives all three roles; hierarchy comes from weight and
- * size, not from switching families. Montserrat ships full Latin **and Cyrillic**,
- * so EN / RU / UZ never fall back to a system font. The three CSS variables
- * (`--font-sans` / `--font-display` / `--font-mono`) are all mapped to Montserrat,
- * so every existing `font-sans` / `font-display` / `font-mono` usage across the app
- * resolves to the same family.
+ * The display role carries the brand's serif identity (the letter-spaced ALTAN
+ * wordmark); body, UI and the figure/ledger role stay on the geometric sans so
+ * dense trading copy remains crisp. Both families ship full Latin **and
+ * Cyrillic**, so EN / RU / UZ never fall back to a system font. The three CSS
+ * variables (`--font-sans` / `--font-display` / `--font-mono`) map every
+ * existing `font-sans` / `font-display` / `font-mono` usage across the app.
  *
  * (next/font requires each call to use explicit object literals — no shared spread.)
  */
@@ -21,11 +21,12 @@ export const fontSans = Montserrat({
   variable: '--font-sans',
 });
 
-/** Display / headings — same family, heavier weights applied via utilities. */
-export const fontDisplay = Montserrat({
+/** Display / headings — the brand serif. Headings use `font-medium` (500);
+ *  600/700 cover emphasis and the wordmark. */
+export const fontDisplay = Playfair_Display({
   subsets: ['latin', 'cyrillic'],
   display: 'swap',
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['500', '600', '700'],
   variable: '--font-display',
 });
 
