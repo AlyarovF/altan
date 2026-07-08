@@ -4,7 +4,6 @@
     "catalog": "Katalog",
     "materials": "Materiallar",
     "capabilities": "Imkoniyatlar",
-    "sourcing": "Logistika",
     "quality": "Sifat",
     "news": "Tahlil",
     "about": "Biz haqimizda",
@@ -34,14 +33,13 @@
   },
   "home": {
     "heroTagline": "Kritik materiallar bozorlar bilan uchrashadigan joy.",
-    "heroTag": "Kritik xom ashyo boʻyicha jahon savdo uyi",
+    "heroTag": "Muhim xom ashyo uchun global markaz",
     "trustBadges": [
       "ISO 9001:2015",
-      "EXW/CIF/FOB/DDP",
+      "Mustaqil tahlil",
       "12 soatda javob",
       "Butun dunyoga yetkazish"
     ],
-    "heroLede": "Volfram, reniy, ferromolibden va karbid — Markaziy Osiyoda qazib olinadi, laboratoriyada tekshiriladi va istalgan Inkoterms shartida butun dunyoga yetkaziladi.",
     "heroSecondary": "Imkoniyatlarimiz",
     "deskTitle": "Savdo stoli",
     "deskLive": "Yetkazish",
@@ -55,19 +53,6 @@
     "featuredEyebrow": "Katalog",
     "featuredHeading": "Tanlangan materiallar",
     "featuredSubheading": "Kon darajasidagi yetkazib berish, laboratoriya tekshiruvi, butun dunyo boʻylab.",
-    "coverageEyebrow": "Qamrov",
-    "coverageHeading": "Dengizga chiqishi yoʻq konlardan istalgan portgacha",
-    "coverageSubheading": "Markaziy Osiyoning dengizga chiqishi yoʻq, shuning uchun marshrutning oʻzi mahoratdir. Materialni temir yoʻl, avtomobil va dengiz orqali kerakli manzil va shartlarda yetkazamiz.",
-    "coverageCta": "Taʼminot va logistika",
-    "processEyebrow": "Jarayon",
-    "processHeading": "ALTAN qanday ishlaydi",
-    "processSubheading": "Kondan sizning portingizgacha — nazoratli va tekshiriladigan zanjir.",
-    "processStep": {
-      "source": "Har bir yetkazib beruvchi va partiyani tekshirib, kon va zavod darajasida sotib olamiz.",
-      "qualify": "Mustaqil laboratoriyalar proba, tozalik va zarracha oʻlchamini spetsifikatsiyaga tekshiradi.",
-      "ship": "Temir yoʻl, avtomobil va dengiz koridorlari materialni kerakli shartlarda olib chiqadi.",
-      "confirm": "Sertifikatlar, qadoqlash varaqlari va hisobotlar har bir buyurtmani toʻliq audit bilan yopadi."
-    },
     "newsEyebrow": "Bozor tahlili",
     "newsHeading": "Savdo stolidan signallar",
     "newsSubheading": "Biz savdo qiladigan materiallar boʻyicha narx signallari va prognoz.",
@@ -91,26 +76,40 @@
     "quality": { "eyebrow": "Marka va sifat", "title": "Taxminan emas, spetsifikatsiya boʻyicha" },
     "preview": { "eyebrow": "Katalogda", "title": "Namunaviy materiallar" }
   },
-  "sourcing": {
+  "incoterms": {
     "hero": {
-      "eyebrow": "Taʼminot va logistika",
-      "title": "Dengizga chiqishi yoʻq konlardan istalgan portgacha",
-      "lede": "ALTAN Markaziy Osiyoda manbadan sotib oladi va materialni multimodal koridorlar — temir yoʻl, avtomobil va dengiz orqali kerakli Inkoterms shartida olib chiqadi."
+      "eyebrow": "Inkoterms",
+      "title": "Sizning shartlaringizda yetkazamiz",
+      "lede": "Zavoddan olib ketishdan boj toʻlangan holda yetkazishgacha — operatsiyangizga mos Inkoterms shartida narx taklif qilamiz va joʻnatamiz."
     },
-    "corridor": {
-      "eyebrow": "Koridor",
-      "title": "Yagona nazoratli multimodal zanjir",
-      "lede": "Dengizga chiqishi yoʻqligi marshrutning oʻzi mahsulot ekanini bildiradi. Har bir bosqichni rejalashtiramiz va yukni sizning shartlaringizda topshiramiz.",
-      "n1": { "label": "Markaziy Osiyo", "sub": "Kon va zavod" },
-      "n2": { "label": "Temir yoʻl st.", "sub": "Bojxona yuklash" },
-      "n3": { "label": "Tranzit port", "sub": "Kaspiy / Qora dengiz" },
-      "n4": { "label": "Jahon bozori", "sub": "Sizning inkoterms" },
-      "l1": { "mode": "Temir yoʻl", "note": "EXW · FCA" },
-      "l2": { "mode": "Avto", "note": "Tranzit" },
-      "l3": { "mode": "Dengiz", "note": "FOB · CIF · DAP" }
+    "EXW": {
+      "term": "Zavoddan olib ketish",
+      "desc": "Yukni kelishilgan punktdan oʻzingiz olasiz; biz partiyani tayyorlab, hujjatlashtiramiz."
     },
-    "modes": { "eyebrow": "Multimodal", "title": "Har bir bosqich rejalashtirilgan" },
-    "incoterms": { "eyebrow": "Inkoterms", "title": "Sizning shartlaringizda yetkazamiz" }
+    "FCA": {
+      "term": "Tashuvchiga topshirish",
+      "desc": "Yukni kelishilgan joyda, eksport rasmiylashtiruvi bilan tashuvchingizga topshiramiz."
+    },
+    "FOB": {
+      "term": "Kema bortiga yuklash",
+      "desc": "Belgilangan joʻnatish portida materialni kemaga yuklaymiz."
+    },
+    "CFR": {
+      "term": "Narx va fraxt",
+      "desc": "Belgilangan portgacha tashish xarajatlarini biz qoplaymiz; xavf yuklashda oʻtadi."
+    },
+    "CIF": {
+      "term": "Narx, sugʻurta va fraxt",
+      "desc": "CFR kabi, qoʻshimcha ravishda belgilangan portgacha dengiz sugʻurtasi bilan."
+    },
+    "DAP": {
+      "term": "Manzilga yetkazib berish",
+      "desc": "Yukni siz belgilagan joyga, tushirishga tayyor holda yetkazamiz."
+    },
+    "DDP": {
+      "term": "Boj toʻlangan holda yetkazish",
+      "desc": "Yukni bojxona rasmiylashtiruvi va bojlari toʻlangan holda eshigingizgacha yetkazamiz."
+    }
   },
   "quality": {
     "hero": {
@@ -118,7 +117,14 @@
       "title": "Har bir partiya hujjatlashtirilgan va tekshirilgan",
       "lede": "Kritik materiallar savdosi hujjatlarga bogʻliq. Har bir partiyani mustaqil laboratoriyalarda tekshiramiz va har bir kontragent va manzilni skrining qilamiz."
     },
-    "assurance": { "eyebrow": "Kafolat", "title": "Yuklashdan oldin tekshirilgan" },
+    "assurance": {
+      "eyebrow": "Kafolat",
+      "title": "Yuklashdan oldin tekshirilgan",
+      "i2": {
+        "title": "Mustaqil tahlil",
+        "body": "Mustaqil laboratoriyalar kimyoviy tarkib, tozalik va zarracha oʻlchamini sizning greydingizga muvofiq tekshiradi."
+      }
+    },
     "docs": { "eyebrow": "Hujjatlar", "title": "Metallni harakatga keltiradigan hujjatlar" },
     "compliance": { "eyebrow": "Muvofiqlik", "title": "Taxmin emas, tekshiruv" }
   },
@@ -129,7 +135,14 @@
       "lede": "ALTAN Markaziy Osiyo konlari va zavodlarini butun dunyodagi sanoat xaridorlari bilan bogʻlaydi — kon darajasidagi kirish, mustaqil tekshiruv va hujjatlashtirilgan zanjir bilan."
     },
     "story": { "eyebrow": "Biz kimmiz", "title": "Manbaga yaqin, xaridor oldida masʼul" },
-    "principles": { "eyebrow": "Qanday ishlaymiz", "title": "Har bir buyurtmada toʻrt tamoyil" }
+    "principles": {
+      "eyebrow": "Qanday ishlaymiz",
+      "title": "Har bir buyurtmada toʻrt tamoyil",
+      "i2": {
+        "title": "Mustaqil tekshiruv",
+        "body": "Material zanjirga kirishidan oldin mustaqil tahlil oʻtkaziladi."
+      }
+    }
   },
   "contact": {
     "hero": {
@@ -150,17 +163,6 @@
       "addressLabel": "Ofis",
       "slaLabel": "Javob",
       "sla": "12 soat ichida"
-    },
-    "coverage": {
-      "eyebrow": "Qamrov",
-      "title": "Yagona savdo deski, global qamrov",
-      "lede": "Markaziy Osiyoda manbadan xarid qilinadi va dunyo bo‘ylab sizning Incoterms shartlaringizda yetkaziladi — so‘rovdan hisob-kitobgacha bitta mas’ul savdo deski.",
-      "d1": { "region": "Markaziy Osiyo", "note": "Manbadan xarid, tahlil va konsolidatsiya" },
-      "d2": {
-        "region": "Yevropa va MEA",
-        "note": "Temir yo‘l va dengiz yo‘laklari, DAP / DDP yetkazish"
-      },
-      "d3": { "region": "Osiyo-Tinch okeani", "note": "Multimodal tranzit, FOB / CIF shartlari" }
     }
   },
   "footer": {

@@ -19,14 +19,12 @@ import { purityFromGrade } from '@/lib/materials';
 export function Hero({
   tagline,
   tag,
-  lede,
   heroStats,
   featured,
   locale,
 }: {
   tagline: string;
   tag: string;
-  lede: string;
   heroStats: SiteStat[];
   featured: ProductCard[];
   locale: string;
@@ -57,12 +55,6 @@ export function Hero({
           >
             {tagline}
           </h1>
-          <p
-            className="mt-6 max-w-xl text-lg leading-relaxed text-steel-300 animate-fade-up"
-            style={{ animationDelay: '120ms' }}
-          >
-            {lede}
-          </p>
           <div
             className="mt-8 flex flex-wrap items-center gap-3 animate-fade-up"
             style={{ animationDelay: '180ms' }}

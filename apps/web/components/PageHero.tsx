@@ -51,7 +51,7 @@ function HeroPlate() {
           {[
             ['REE', 'La·Ce·Nd'],
             ['Purity', '≥ 99.9%'],
-            ['Terms', 'EXW·CIF'],
+            ['Assay', 'CoA·CoO'],
           ].map(([k, v]) => (
             <div key={k}>
               <dt className="text-[10px] uppercase tracking-ticker text-steel-500">{k}</dt>

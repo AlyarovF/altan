@@ -41,7 +41,7 @@ export async function generateMetadata({
     },
     description:
       (content?.tag as string | undefined) ??
-      'Global trading house for critical raw materials, sourced from Central Asia and delivered worldwide.',
+      'Global hub for critical raw materials, sourced from Central Asia and delivered worldwide.',
     alternates: {
       canonical: `${SITE_URL}/${locale}`,
       languages,

@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { Mail, Phone, MapPin, Clock, Check, Globe } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Check } from 'lucide-react';
 import { fetchSiteContent } from '@/lib/api/content';
 import { PageHero } from '@/components/PageHero';
-import { SectionHeading } from '@/components/SectionHeading';
 import { QuoteButton } from '@/components/QuoteButton';
 import { Reveal } from '@/components/Reveal';
 
@@ -26,10 +25,6 @@ export default async function ContactPage({ params: { locale } }: { params: { lo
   const footer = content?.footer;
 
   const checklist = [1, 2, 3, 4].map((n) => t(`rfq.c${n}`));
-  const desks = [1, 2, 3].map((n) => ({
-    region: t(`coverage.d${n}.region`),
-    note: t(`coverage.d${n}.note`),
-  }));
   const details = [
     footer?.email && {
       icon: Mail,
@@ -106,25 +101,6 @@ export default async function ContactPage({ params: { locale } }: { params: { lo
               ))}
             </ul>
           </Reveal>
-        </div>
-      </section>
-
-      <section className="border-t border-steel-200 bg-steel-50">
-        <div className="shell py-20 lg:py-24">
-          <SectionHeading title={t('coverage.title')} lede={t('coverage.lede')} />
-          <div className="grid gap-5 md:grid-cols-3">
-            {desks.map((desk, i) => (
-              <Reveal key={desk.region} delay={i * 70}>
-                <div className="tick flex h-full flex-col rounded-card border border-steel-200 bg-white p-6 shadow-card">
-                  <span className="grid h-11 w-11 place-items-center rounded-lg bg-ink text-amber-bright">
-                    <Globe className="h-5 w-5" aria-hidden />
-                  </span>
-                  <h3 className="mt-5 font-display text-lg font-medium text-ink">{desk.region}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-steel-600">{desk.note}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
     </>

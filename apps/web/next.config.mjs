@@ -34,6 +34,14 @@ const nextConfig = {
   },
   // Standalone output for containerized deployment on the owner's server (plan step 20).
   output: 'standalone',
+  // The Sourcing & Logistics page was removed; its incoterms content lives at /incoterms.
+  // Permanent redirects preserve inbound links and SEO equity.
+  async redirects() {
+    return [
+      { source: '/sourcing', destination: '/incoterms', permanent: true },
+      { source: '/:locale(en|ru|uz)/sourcing', destination: '/:locale/incoterms', permanent: true },
+    ];
+  },
   // Same-origin proxy: browser calls /api and /media are forwarded to the API so the site
   // works via any host (public IP or tunnel) with no CORS. SSR calls the API directly.
   async rewrites() {

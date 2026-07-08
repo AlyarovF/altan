@@ -4,7 +4,6 @@
     "catalog": "Catalog",
     "materials": "Materials",
     "capabilities": "Capabilities",
-    "sourcing": "Sourcing",
     "quality": "Quality",
     "news": "Insights",
     "about": "About",
@@ -34,9 +33,8 @@
   },
   "home": {
     "heroTagline": "Where Critical Materials Meet Markets.",
-    "heroTag": "Global Trading House for Critical Raw Materials",
-    "trustBadges": ["ISO 9001:2015", "EXW/CIF/FOB/DDP", "12h quote response", "Global delivery"],
-    "heroLede": "Tungsten, rhenium, ferromolybdenum and carbide — mine-sourced across Central Asia, lab-qualified, and delivered worldwide on any incoterm.",
+    "heroTag": "Global Hub for Critical Raw Materials",
+    "trustBadges": ["ISO 9001:2015", "Independent assay", "12h quote response", "Global delivery"],
     "heroSecondary": "Explore capabilities",
     "deskTitle": "Materials desk",
     "deskLive": "Sourcing",
@@ -50,19 +48,6 @@
     "featuredEyebrow": "Catalog",
     "featuredHeading": "Featured materials",
     "featuredSubheading": "Mine-level supply, lab-qualified, delivered worldwide.",
-    "coverageEyebrow": "Coverage",
-    "coverageHeading": "From landlocked mines to any port",
-    "coverageSubheading": "Central Asia is landlocked, so the corridor is the craft. We move material by rail, road and sea to the destination and incoterm you trade on.",
-    "coverageCta": "Sourcing & logistics",
-    "processEyebrow": "Process",
-    "processHeading": "How ALTAN works",
-    "processSubheading": "From the mine to your dock — a controlled, auditable chain.",
-    "processStep": {
-      "source": "We buy at the mine and smelter gate, auditing each supplier and lot before it enters our chain.",
-      "qualify": "Independent laboratories verify assay, purity and particle size against your specification.",
-      "ship": "Rail, road and sea corridors carry material out of a landlocked region on the incoterm you need.",
-      "confirm": "Certificates, packing lists and delivery reporting close every order with a full audit trail."
-    },
     "newsEyebrow": "Market intelligence",
     "newsHeading": "Signals from the desk",
     "newsSubheading": "Price signals and outlook across the materials we trade.",
@@ -120,73 +105,39 @@
       "lede": "A sample of what we move. Browse the full catalog for grades and minimums."
     }
   },
-  "sourcing": {
+  "incoterms": {
     "hero": {
-      "eyebrow": "Sourcing & Logistics",
-      "title": "From landlocked mines to any port",
-      "lede": "ALTAN procures at the source in Central Asia and carries material out through multimodal corridors — rail, road and sea — on the incoterm you trade on."
-    },
-    "corridor": {
-      "eyebrow": "The corridor",
-      "title": "One controlled, multimodal chain",
-      "lede": "A landlocked origin means the route is the product. We plan each leg, bond the transit and hand over on your terms.",
-      "n1": { "label": "Central Asia", "sub": "Mine & smelter" },
-      "n2": { "label": "Rail head", "sub": "Bonded loading" },
-      "n3": { "label": "Transit port", "sub": "Caspian / Black Sea" },
-      "n4": { "label": "Global market", "sub": "Your incoterm" },
-      "l1": { "mode": "Rail", "note": "EXW · FCA" },
-      "l2": { "mode": "Road", "note": "Bonded transit" },
-      "l3": { "mode": "Sea", "note": "FOB · CIF · DAP" }
-    },
-    "modes": {
-      "eyebrow": "Multimodal",
-      "title": "Every leg, planned",
-      "lede": "Rail, road and sea combine into one accountable movement from source to destination.",
-      "i1": {
-        "title": "Rail",
-        "body": "Block trains and wagons move bulk material out of the region on scheduled paths."
-      },
-      "i2": {
-        "title": "Road",
-        "body": "Bonded trucking bridges smelters, railheads and ports where rail does not reach."
-      },
-      "i3": {
-        "title": "Sea",
-        "body": "Onward ocean freight via the Caspian, Black Sea and beyond to your destination port."
-      }
-    },
-    "incoterms": {
       "eyebrow": "Incoterms",
       "title": "We deliver on your terms",
-      "lede": "From ex-works pickup to delivered-duty-paid, we quote and ship on the incoterm that fits your operation.",
-      "EXW": {
-        "term": "Ex Works",
-        "desc": "You collect at our named point; we prepare and document the lot."
-      },
-      "FCA": {
-        "term": "Free Carrier",
-        "desc": "We hand over to your carrier at the agreed place, cleared for export."
-      },
-      "FOB": {
-        "term": "Free On Board",
-        "desc": "We load onto the vessel at the named port of shipment."
-      },
-      "CFR": {
-        "term": "Cost and Freight",
-        "desc": "We cover carriage to the destination port; risk passes on loading."
-      },
-      "CIF": {
-        "term": "Cost, Insurance & Freight",
-        "desc": "As CFR, with marine insurance to the destination port."
-      },
-      "DAP": {
-        "term": "Delivered At Place",
-        "desc": "We deliver to your named place, ready for unloading."
-      },
-      "DDP": {
-        "term": "Delivered Duty Paid",
-        "desc": "We deliver cleared and duties paid at your door."
-      }
+      "lede": "From ex-works pickup to delivered-duty-paid, we quote and ship on the incoterm that fits your operation."
+    },
+    "EXW": {
+      "term": "Ex Works",
+      "desc": "You collect at our named point; we prepare and document the lot."
+    },
+    "FCA": {
+      "term": "Free Carrier",
+      "desc": "We hand over to your carrier at the agreed place, cleared for export."
+    },
+    "FOB": {
+      "term": "Free On Board",
+      "desc": "We load onto the vessel at the named port of shipment."
+    },
+    "CFR": {
+      "term": "Cost and Freight",
+      "desc": "We cover carriage to the destination port; risk passes on loading."
+    },
+    "CIF": {
+      "term": "Cost, Insurance & Freight",
+      "desc": "As CFR, with marine insurance to the destination port."
+    },
+    "DAP": {
+      "term": "Delivered At Place",
+      "desc": "We deliver to your named place, ready for unloading."
+    },
+    "DDP": {
+      "term": "Delivered Duty Paid",
+      "desc": "We deliver cleared and duties paid at your door."
     }
   },
   "quality": {
@@ -205,7 +156,7 @@
       },
       "i2": {
         "title": "Independent assay",
-        "body": "Third-party laboratories verify chemistry, purity and particle size against your grade."
+        "body": "Independent laboratories verify chemistry, purity and particle size against your grade."
       },
       "i3": {
         "title": "Certificate of Analysis",
@@ -276,7 +227,7 @@
       },
       "i2": {
         "title": "Independent qualification",
-        "body": "Third-party assay before material enters the chain."
+        "body": "Independent assay before material enters the chain."
       },
       "i3": {
         "title": "Auditable chain",
@@ -312,14 +263,6 @@
       "addressLabel": "Office",
       "slaLabel": "Response",
       "sla": "Within 12 hours"
-    },
-    "coverage": {
-      "eyebrow": "Coverage",
-      "title": "One desk, global reach",
-      "lede": "Sourced at the origin in Central Asia, delivered on your incoterms worldwide — one accountable trade desk from enquiry to settlement.",
-      "d1": { "region": "Central Asia", "note": "Origin sourcing, assay and consolidation" },
-      "d2": { "region": "Europe & MEA", "note": "Rail and sea corridors, DAP / DDP delivery" },
-      "d3": { "region": "Asia Pacific", "note": "Multimodal transit, FOB / CIF terms" }
     }
   },
   "footer": {

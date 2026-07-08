@@ -83,7 +83,6 @@ export function Footer({ companyName, footer }: { companyName: string; footer?: 
       <div className="border-t border-white/5">
         <div className="shell flex flex-col items-center justify-between gap-2 py-6 text-xs text-steel-400 sm:flex-row">
           <span>{copyright}</span>
-          <span className="font-mono">EXW · FCA · FOB · CFR · CIF · DAP · DDP</span>
         </div>
       </div>
     </footer>

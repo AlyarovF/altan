@@ -2,12 +2,10 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Button } from 'antd';
 import { Link } from '@/i18n/routing';
 import { SITE_URL } from '@/lib/env';
-import { fetchSiteContent, fetchStats, fetchProcessSteps } from '@/lib/api/content';
+import { fetchSiteContent, fetchStats } from '@/lib/api/content';
 import { fetchProducts, fetchBadges, fetchNews, fetchCategories } from '@/lib/api/catalog';
 import { Hero } from '@/features/home/Hero';
 import { TrustBar } from '@/features/home/TrustBar';
-import { ProcessSteps } from '@/features/home/ProcessSteps';
-import { Coverage } from '@/features/home/Coverage';
 import { SectionHeading } from '@/components/SectionHeading';
 import { CategoryGrid } from '@/components/CategoryGrid';
 import { ProductCard } from '@/components/ProductCard';
@@ -21,17 +19,15 @@ export default async function HomePage({ params: { locale } }: { params: { local
   const t = await getTranslations('home');
   const tc = await getTranslations('common');
 
-  const [content, stats, steps, deskFeatured, gridProducts, categories, badges, news] =
-    await Promise.all([
-      fetchSiteContent(locale),
-      fetchStats(locale),
-      fetchProcessSteps(locale),
-      fetchProducts({ featured: true, limit: 4, locale }),
-      fetchProducts({ limit: 8, sort: 'sortOrder', locale }),
-      fetchCategories(),
-      fetchBadges(),
-      fetchNews(locale, 3),
-    ]);
+  const [content, stats, deskFeatured, gridProducts, categories, badges, news] = await Promise.all([
+    fetchSiteContent(locale),
+    fetchStats(locale),
+    fetchProducts({ featured: true, limit: 4, locale }),
+    fetchProducts({ limit: 8, sort: 'sortOrder', locale }),
+    fetchCategories(),
+    fetchBadges(),
+    fetchNews(locale, 3),
+  ]);
 
   // CMS content (`/content?locale=`) is localized by the backend (EN base + RU/UZ
   // overrides). Prefer the admin-authored CMS value for every locale; fall back to
@@ -63,7 +59,6 @@ export default async function HomePage({ params: { locale } }: { params: { local
       <Hero
         tagline={tagline}
         tag={tag}
-        lede={t('heroLede')}
         heroStats={stats?.HERO ?? []}
         featured={desk}
         locale={locale}
@@ -108,10 +103,6 @@ export default async function HomePage({ params: { locale } }: { params: { local
           </div>
         </section>
       )}
-
-      <Coverage />
-
-      <ProcessSteps steps={steps ?? []} stats={stats?.PROCESS_BAR ?? []} />
 
       {news && news.data.length > 0 && (
         <section className="shell py-20 lg:py-24">
