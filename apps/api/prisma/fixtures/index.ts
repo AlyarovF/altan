@@ -12,10 +12,13 @@
 import {
   BadgeCode,
   ChangeDirection,
+  Currency,
   LocaleCode,
   Outlook,
   ProductStatus,
   SiteStatGroup,
+  type Incoterm,
+  type Unit,
 } from '@altan/shared';
 
 // --- Categories -------------------------------------------------------------
@@ -112,7 +115,13 @@ export interface ProductFixture {
   standard?: string;
   origin?: string;
   minOrderQty?: string; // Decimal as string
-  minOrderUnit?: string;
+  minOrderUnit?: Unit;
+  // Indicative pricing (optional — products without a price render "Price on request").
+  priceAmount?: string; // Decimal as string
+  priceCurrency?: Currency;
+  priceUnit?: Unit; // canonical UNITS only (MT, kg, g, lb, mtu, pcs)
+  priceBasis?: Incoterm;
+  priceNote?: string;
   shortDescription?: string;
   description?: string;
   sortOrder: number;
@@ -136,6 +145,11 @@ export const products: ProductFixture[] = [
     origin: 'Central Asia',
     minOrderQty: '1000',
     minOrderUnit: 'kg',
+    priceAmount: '54.00',
+    priceCurrency: Currency.USD,
+    priceUnit: 'kg',
+    priceBasis: 'FCA',
+    priceNote: 'FCA Tashkent, min 1 MT; indicative — firm offer via RFQ.',
     shortDescription: 'High-purity sintered tungsten briquette for downstream metallurgy.',
     description:
       'Sintered tungsten briquette (W ≥ 96.3%) produced to OʻzMSt 227:2024 and sourced from Central Asian mine-level supply. Supplied with certificate of analysis and certificate of origin; HS code 8101 99 9000 for customs.',
@@ -185,6 +199,11 @@ export const products: ProductFixture[] = [
     origin: 'Central Asia',
     minOrderQty: '1',
     minOrderUnit: 'kg',
+    priceAmount: '1850.00',
+    priceCurrency: Currency.USD,
+    priceUnit: 'kg',
+    priceBasis: 'FCA',
+    priceNote: 'FCA Tashkent; CoA per lot.',
     shortDescription: 'Aerospace-grade rhenium in powder or granular form.',
     description:
       'High-purity rhenium (Re ≥ 99.54%) supplied as powder or granules for superalloy and catalyst applications. HS code 8186 00 0000.',
@@ -232,6 +251,11 @@ export const products: ProductFixture[] = [
     origin: 'Central Asia',
     minOrderQty: '500',
     minOrderUnit: 'kg',
+    priceAmount: '52.50',
+    priceCurrency: Currency.USD,
+    priceUnit: 'kg',
+    priceBasis: 'FCA',
+    priceNote: 'Per kg Mo contained, FCA Tashkent.',
     shortDescription: 'Ferromolybdenum alloy for steelmaking, FeMo 60/70 grades.',
     description:
       'Ferromolybdenum (Mo 55–75%) in FeMo 60 and FeMo 70 grades for alloy and stainless steelmaking. HS code 7202 70 0000.',
@@ -328,6 +352,10 @@ export const products: ProductFixture[] = [
     origin: 'Central Asia',
     minOrderQty: '25',
     minOrderUnit: 'kg',
+    priceAmount: '68.00',
+    priceCurrency: Currency.USD,
+    priceUnit: 'kg',
+    priceBasis: 'FCA',
     shortDescription: 'High-purity molybdenum metal powder for sintering and coatings.',
     sortOrder: 5,
     badges: [],
@@ -356,6 +384,11 @@ export const products: ProductFixture[] = [
     origin: 'Central Asia',
     minOrderQty: '500',
     minOrderUnit: 'kg',
+    priceAmount: '385.00',
+    priceCurrency: Currency.USD,
+    priceUnit: 'mtu',
+    priceBasis: 'FCA',
+    priceNote: 'Per mtu WO₃, FCA Tashkent.',
     shortDescription: 'APT — primary tungsten chemical intermediate for powder production.',
     sortOrder: 6,
     badges: [],
@@ -384,6 +417,10 @@ export const products: ProductFixture[] = [
     origin: 'Central Asia',
     minOrderQty: '50',
     minOrderUnit: 'kg',
+    priceAmount: '82.00',
+    priceCurrency: Currency.USD,
+    priceUnit: 'kg',
+    priceBasis: 'FCA',
     shortDescription: 'Tungsten carbide powder across fine to coarse FSSS grades.',
     sortOrder: 7,
     badges: [],
@@ -434,6 +471,11 @@ export const products: ProductFixture[] = [
     status: ProductStatus.PUBLISHED,
     grade: 'WC-Co nibs',
     hsCode: '8207 20 1000',
+    priceAmount: '14.50',
+    priceCurrency: Currency.USD,
+    priceUnit: 'pcs',
+    priceBasis: 'EXW',
+    priceNote: 'Standard nib sizes; custom profiles priced via RFQ.',
     shortDescription: 'Tungsten-carbide nib wire-drawing dies for ferrous and non-ferrous wire.',
     sortOrder: 9,
     badges: [],
@@ -459,6 +501,10 @@ export const products: ProductFixture[] = [
     status: ProductStatus.PUBLISHED,
     grade: 'Al₂O₃ 96/99.5%',
     hsCode: '6909 19 0000',
+    priceAmount: '19.80',
+    priceCurrency: Currency.USD,
+    priceUnit: 'kg',
+    priceBasis: 'EXW',
     shortDescription: 'High-alumina ceramic substrates for electronics and wear parts.',
     sortOrder: 10,
     badges: [],
@@ -506,6 +552,11 @@ export const products: ProductFixture[] = [
     featured: false,
     status: ProductStatus.PUBLISHED,
     hsCode: '9027 30 0000',
+    priceAmount: '28500.00',
+    priceCurrency: Currency.USD,
+    priceUnit: 'pcs',
+    priceBasis: 'DAP',
+    priceNote: 'DAP major hubs; includes calibration certificate.',
     shortDescription: 'Portable XRF analyzer for on-site alloy and ore assay verification.',
     sortOrder: 12,
     badges: [],
@@ -529,6 +580,10 @@ export const products: ProductFixture[] = [
     featured: false,
     status: ProductStatus.PUBLISHED,
     hsCode: '8514 30 0000',
+    priceAmount: '6400.00',
+    priceCurrency: Currency.USD,
+    priceUnit: 'pcs',
+    priceBasis: 'DAP',
     shortDescription: 'High-temperature muffle furnace for assay, ashing and sintering.',
     sortOrder: 13,
     badges: [],
@@ -850,7 +905,8 @@ export interface SiteContentFixture {
 
 export const siteContent: SiteContentFixture[] = [
   // Brand constant — no translations; RU/UZ fall back to this EN base.
-  { key: 'companyName', valueJson: 'ALTAN Trading House' },
+  // The brand wordmark carries the "Critical Raw Materials" sub-line.
+  { key: 'companyName', valueJson: 'ALTAN' },
   {
     key: 'tagline',
     valueJson: 'Where Critical Materials Meet Markets.',
@@ -861,21 +917,21 @@ export const siteContent: SiteContentFixture[] = [
   },
   {
     key: 'tag',
-    valueJson: 'Global Trading House for Critical Raw Materials',
+    valueJson: 'Global Hub for Critical Raw Materials',
     translations: [
-      { locale: LocaleCode.RU, valueJson: 'Глобальный торговый дом критически важного сырья' },
-      { locale: LocaleCode.UZ, valueJson: 'Muhim xom ashyo uchun global savdo uyi' },
+      { locale: LocaleCode.RU, valueJson: 'Глобальный хаб критически важного сырья' },
+      { locale: LocaleCode.UZ, valueJson: 'Muhim xom ashyo uchun global markaz' },
     ],
   },
   {
     key: 'trustBadges',
-    valueJson: ['ISO 9001:2015', 'EXW/CIF/FOB/DDP', '12h quote response', 'Global delivery'],
+    valueJson: ['ISO 9001:2015', 'Independent assay', '12h quote response', 'Global delivery'],
     translations: [
       {
         locale: LocaleCode.RU,
         valueJson: [
           'ISO 9001:2015',
-          'EXW/CIF/FOB/DDP',
+          'Независимый анализ',
           'Ответ на запрос за 12 ч',
           'Глобальная доставка',
         ],
@@ -884,7 +940,7 @@ export const siteContent: SiteContentFixture[] = [
         locale: LocaleCode.UZ,
         valueJson: [
           'ISO 9001:2015',
-          'EXW/CIF/FOB/DDP',
+          'Mustaqil tahlil',
           '12 soatda javob',
           'Global yetkazib berish',
         ],
@@ -894,12 +950,12 @@ export const siteContent: SiteContentFixture[] = [
   {
     key: 'footer',
     valueJson: {
-      companyName: 'ALTAN Trading House',
+      companyName: 'ALTAN',
       tagline: 'Where Critical Materials Meet Markets.',
-      email: 'sales@altan.trade',
-      phone: '+998 71 000 0000',
-      address: 'Tashkent, Uzbekistan',
-      copyright: '© 2026 ALTAN Trading House. All rights reserved.',
+      email: 'sales@altan.info',
+      phone: '+7 776 5300300',
+      address: 'Almaty, Kazakhstan',
+      copyright: '© 2026 ALTAN. All rights reserved.',
       columns: [
         {
           heading: 'Products',
@@ -933,12 +989,12 @@ export const siteContent: SiteContentFixture[] = [
       {
         locale: LocaleCode.RU,
         valueJson: {
-          companyName: 'ALTAN Trading House',
+          companyName: 'ALTAN',
           tagline: 'Где критически важные материалы встречают рынки.',
-          email: 'sales@altan.trade',
-          phone: '+998 71 000 0000',
-          address: 'Ташкент, Узбекистан',
-          copyright: '© 2026 ALTAN Trading House. Все права защищены.',
+          email: 'sales@altan.info',
+          phone: '+7 776 5300300',
+          address: 'Алматы, Казахстан',
+          copyright: '© 2026 ALTAN. Все права защищены.',
           columns: [
             {
               heading: 'Продукция',
@@ -975,12 +1031,12 @@ export const siteContent: SiteContentFixture[] = [
       {
         locale: LocaleCode.UZ,
         valueJson: {
-          companyName: 'ALTAN Trading House',
+          companyName: 'ALTAN',
           tagline: 'Muhim materiallar bozor bilan uchrashadigan joy.',
-          email: 'sales@altan.trade',
-          phone: '+998 71 000 0000',
-          address: 'Toshkent, Oʻzbekiston',
-          copyright: '© 2026 ALTAN Trading House. Barcha huquqlar himoyalangan.',
+          email: 'sales@altan.info',
+          phone: '+7 776 5300300',
+          address: 'Almati, Qozogʻiston',
+          copyright: '© 2026 ALTAN. Barcha huquqlar himoyalangan.',
           columns: [
             {
               heading: 'Mahsulotlar',
@@ -1075,13 +1131,6 @@ export const translations: TranslationFixture[] = [
     en: 'Featured materials',
     ru: 'Избранные материалы',
     uz: 'Tanlangan materiallar',
-  },
-  {
-    namespace: 'home',
-    key: 'processHeading',
-    en: 'How we work',
-    ru: 'Как мы работаем',
-    uz: 'Qanday ishlaymiz',
   },
   {
     namespace: 'home',

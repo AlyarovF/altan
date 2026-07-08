@@ -26,6 +26,14 @@ enum LocaleCode {
   UZ
 }
 
+enum Currency {
+  USD
+  EUR
+  CNY
+  RUB
+  UZS
+}
+
 enum Incoterm {
   EXW
   FCA
@@ -159,6 +167,14 @@ model Product {
   origin           String? // country/region of origin
   minOrderQty      Decimal?      @db.Decimal(18, 3)
   minOrderUnit     String? // kg, t, MTU, pcs…
+  // Indicative pricing (all-or-nothing group in practice; no price → "Price on request").
+  // Binding prices still come via the RFQ → Quote flow.
+  priceAmount      Decimal?      @db.Decimal(18, 2) // per-unit price; Decimal-as-string over API
+  priceCurrency    Currency? // USD primary
+  priceUnit        String? // MT, kg, mtu… — same style as minOrderUnit
+  priceBasis       Incoterm? // price basis, e.g. FCA
+  priceNote        String? // free text, e.g. "FCA Tashkent, min 5 MT"
+  priceUpdatedAt   DateTime? // set by the service whenever any price field changes; never by client
   shortDescription String?
   description      String?
   imageUrl         String? // primary/display image URL (served from MEDIA_DIR or external)
