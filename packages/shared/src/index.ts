@@ -13,9 +13,35 @@ export * from './api.js';
 export const LOCALES = ['en', 'ru', 'uz'] as const;
 export type Locale = (typeof LOCALES)[number];
 
-/** Incoterms offered by ALTAN (trust badge: EXW/CIF/FOB/DDP · "all incoterms"). */
+/** Incoterms offered by ALTAN. */
 export const INCOTERMS = ['EXW', 'FCA', 'FOB', 'CFR', 'CIF', 'DAP', 'DDP'] as const;
 export type Incoterm = (typeof INCOTERMS)[number];
+
+/**
+ * Canonical units of measure for quantities and indicative prices.
+ * MT = metric tonne, mtu = metric tonne unit (10 kg of contained WO3, APT convention),
+ * pcs = pieces (tooling/instruments).
+ */
+export const UNITS = ['MT', 'kg', 'g', 'lb', 'mtu', 'pcs'] as const;
+export type Unit = (typeof UNITS)[number];
+
+/** Currencies supported for indicative product pricing (USD primary). Mirrors Prisma `Currency`. */
+export enum Currency {
+  USD = 'USD',
+  EUR = 'EUR',
+  CNY = 'CNY',
+  RUB = 'RUB',
+  UZS = 'UZS',
+}
+
+/** Currency list convention (mirrors INCOTERMS) for selects / zod enums. */
+export const CURRENCIES = [
+  Currency.USD,
+  Currency.EUR,
+  Currency.CNY,
+  Currency.RUB,
+  Currency.UZS,
+] as const;
 
 /** Product categories shown in the catalog. */
 export const PRODUCT_CATEGORIES = [
@@ -132,7 +158,7 @@ export const quoteItemSchema = z.object({
   productId: z.string().uuid().optional(),
   productName: z.string().min(1).max(200),
   quantity: z.number().positive(),
-  unit: z.string().min(1).max(20),
+  unit: z.enum(UNITS),
   notes: z.string().max(2000).optional(),
 });
 export type QuoteItemInput = z.infer<typeof quoteItemSchema>;
