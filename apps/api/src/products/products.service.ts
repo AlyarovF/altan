@@ -1,5 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import {
+  Currency as PrismaCurrency,
+  Incoterm as PrismaIncoterm,
   LocaleCode as PrismaLocaleCode,
   Prisma,
   ProductStatus as PrismaProductStatus,
@@ -45,6 +47,7 @@ export class ProductsService {
   async listPublic(query: ProductQueryDto): Promise<Paginated<ProductCardDto>> {
     const locale = toLocaleCode(query.locale);
     const where = this.buildWhere(query, PrismaProductStatus.PUBLISHED);
+    if (query.priced === 'true') where.priceAmount = { not: null };
     const { skip, take } = toSkipTake(query.page, query.limit);
 
     const [rows, total] = await this.prisma.$transaction([
@@ -113,6 +116,14 @@ export class ProductsService {
   // --- Admin writes ---------------------------------------------------------
 
   async create(dto: CreateProductDto, actorId: string): Promise<AdminProductDto> {
+    this.assertPriceConsistent(dto.priceAmount, dto.priceCurrency, dto.priceUnit);
+    const hasPriceInput =
+      dto.priceAmount != null ||
+      dto.priceCurrency != null ||
+      dto.priceUnit != null ||
+      dto.priceBasis != null ||
+      dto.priceNote != null;
+
     const created = await this.prisma.$transaction(async (tx) => {
       const product = await tx.product.create({
         data: {
@@ -128,6 +139,12 @@ export class ProductsService {
           origin: dto.origin ?? null,
           minOrderQty: dto.minOrderQty != null ? new Prisma.Decimal(dto.minOrderQty) : null,
           minOrderUnit: dto.minOrderUnit ?? null,
+          priceAmount: dto.priceAmount != null ? new Prisma.Decimal(dto.priceAmount) : null,
+          priceCurrency: (dto.priceCurrency ?? null) as PrismaCurrency | null,
+          priceUnit: dto.priceUnit ?? null,
+          priceBasis: (dto.priceBasis ?? null) as PrismaIncoterm | null,
+          priceNote: dto.priceNote ?? null,
+          priceUpdatedAt: hasPriceInput ? new Date() : null,
           shortDescription: dto.shortDescription ?? null,
           description: dto.description ?? null,
           imageUrl: dto.imageUrl ?? null,
@@ -164,6 +181,14 @@ export class ProductsService {
     });
     if (!existing) throw new NotFoundException('Product not found.');
 
+    // Effective post-update price fields: DTO value when present, current DB value otherwise.
+    this.assertPriceConsistent(
+      dto.priceAmount !== undefined ? dto.priceAmount : existing.priceAmount,
+      dto.priceCurrency !== undefined ? dto.priceCurrency : existing.priceCurrency,
+      dto.priceUnit !== undefined ? dto.priceUnit : existing.priceUnit,
+    );
+    const priceChanged = this.priceChanged(existing, dto);
+
     const updated = await this.prisma.$transaction(async (tx) => {
       await tx.product.update({
         where: { id },
@@ -185,6 +210,23 @@ export class ProductsService {
                 : null
               : undefined,
           minOrderUnit: dto.minOrderUnit,
+          priceAmount:
+            dto.priceAmount !== undefined
+              ? dto.priceAmount != null
+                ? new Prisma.Decimal(dto.priceAmount)
+                : null
+              : undefined,
+          priceCurrency:
+            dto.priceCurrency !== undefined
+              ? ((dto.priceCurrency ?? null) as PrismaCurrency | null)
+              : undefined,
+          priceUnit: dto.priceUnit,
+          priceBasis:
+            dto.priceBasis !== undefined
+              ? ((dto.priceBasis ?? null) as PrismaIncoterm | null)
+              : undefined,
+          priceNote: dto.priceNote,
+          priceUpdatedAt: priceChanged ? new Date() : undefined,
           shortDescription: dto.shortDescription,
           description: dto.description,
           imageUrl: dto.imageUrl,
@@ -271,6 +313,45 @@ export class ProductsService {
     });
   }
 
+  // --- Pricing helpers ------------------------------------------------------
+
+  /** A product with a price amount must always carry a currency and a unit. */
+  private assertPriceConsistent(
+    amount: number | Prisma.Decimal | null | undefined,
+    currency: string | null | undefined,
+    unit: string | null | undefined,
+  ): void {
+    if (amount == null) return;
+    if (currency == null || unit == null) {
+      throw new BadRequestException(
+        'priceCurrency and priceUnit are required when priceAmount is set.',
+      );
+    }
+  }
+
+  /**
+   * True when at least one of the five writable price fields is present in the DTO
+   * (`!== undefined`) AND its normalized value differs from the stored value — drives
+   * the `priceUpdatedAt` bump (an unchanged resend must NOT bump it).
+   */
+  private priceChanged(existing: ProductWithRelations, dto: UpdateProductDto): boolean {
+    if (dto.priceAmount !== undefined) {
+      const next = dto.priceAmount != null ? new Prisma.Decimal(dto.priceAmount) : null;
+      const current = existing.priceAmount;
+      if ((next === null) !== (current === null)) return true;
+      if (next !== null && current !== null && !current.equals(next)) return true;
+    }
+    if (dto.priceCurrency !== undefined && (dto.priceCurrency ?? null) !== existing.priceCurrency) {
+      return true;
+    }
+    if (dto.priceUnit !== undefined && (dto.priceUnit ?? null) !== existing.priceUnit) return true;
+    if (dto.priceBasis !== undefined && (dto.priceBasis ?? null) !== existing.priceBasis) {
+      return true;
+    }
+    if (dto.priceNote !== undefined && (dto.priceNote ?? null) !== existing.priceNote) return true;
+    return false;
+  }
+
   // --- Query builders -------------------------------------------------------
 
   private buildWhere(
@@ -337,6 +418,11 @@ export class ProductsService {
       badges: product.badges.map((b) => b.badgeCode as BadgeCode),
       minOrderQty: product.minOrderQty ? product.minOrderQty.toString() : null,
       minOrderUnit: product.minOrderUnit,
+      priceAmount: product.priceAmount ? product.priceAmount.toString() : null,
+      priceCurrency: product.priceCurrency,
+      priceUnit: product.priceUnit,
+      priceBasis: product.priceBasis,
+      priceUpdatedAt: product.priceUpdatedAt ? product.priceUpdatedAt.toISOString() : null,
       hsCode: product.hsCode,
       imageUrl: product.imageUrl,
       region: {
@@ -357,6 +443,7 @@ export class ProductsService {
       description: l.description,
       standard: product.standard,
       origin: product.origin,
+      priceNote: product.priceNote,
       specs: product.specs.map((s) => ({
         id: s.id,
         label: s.label,
@@ -378,6 +465,12 @@ export class ProductsService {
       category: { slug: product.category.slug, name: product.category.name },
       region: { code: product.region.code, name: product.region.name },
       badges: product.badges.map((b) => b.badgeCode as BadgeCode),
+      priceAmount: product.priceAmount ? product.priceAmount.toString() : null,
+      priceCurrency: product.priceCurrency,
+      priceUnit: product.priceUnit,
+      priceBasis: product.priceBasis,
+      priceNote: product.priceNote,
+      priceUpdatedAt: product.priceUpdatedAt ? product.priceUpdatedAt.toISOString() : null,
       createdAt: product.createdAt.toISOString(),
       updatedAt: product.updatedAt.toISOString(),
     };
@@ -399,6 +492,12 @@ export class ProductsService {
       origin: product.origin,
       minOrderQty: product.minOrderQty ? product.minOrderQty.toString() : null,
       minOrderUnit: product.minOrderUnit,
+      priceAmount: product.priceAmount ? product.priceAmount.toString() : null,
+      priceCurrency: product.priceCurrency,
+      priceUnit: product.priceUnit,
+      priceBasis: product.priceBasis,
+      priceNote: product.priceNote,
+      priceUpdatedAt: product.priceUpdatedAt ? product.priceUpdatedAt.toISOString() : null,
       shortDescription: product.shortDescription,
       description: product.description,
       imageUrl: product.imageUrl,
@@ -465,6 +564,12 @@ export class ProductsService {
       imageUrl: product.imageUrl,
       minOrderQty: product.minOrderQty?.toString() ?? null,
       minOrderUnit: product.minOrderUnit,
+      priceAmount: product.priceAmount?.toString() ?? null,
+      priceCurrency: product.priceCurrency,
+      priceUnit: product.priceUnit,
+      priceBasis: product.priceBasis,
+      priceNote: product.priceNote,
+      priceUpdatedAt: product.priceUpdatedAt?.toISOString() ?? null,
       sortOrder: product.sortOrder,
       badges: product.badges.map((b) => b.badgeCode),
       specs: product.specs.map((s) => ({ label: s.label, value: s.value, unit: s.unit })),

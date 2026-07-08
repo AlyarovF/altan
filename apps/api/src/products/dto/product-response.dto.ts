@@ -30,6 +30,14 @@ export class ProductCardDto {
   @ApiPropertyOptional({ type: String, nullable: true, description: 'Decimal as string.' })
   minOrderQty!: string | null;
   @ApiPropertyOptional({ type: String, nullable: true }) minOrderUnit!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true, description: 'Decimal as string.' })
+  priceAmount!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) priceCurrency!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) priceUnit!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true, description: 'Price basis (Incoterm).' })
+  priceBasis!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true, description: 'ISO date-time.' })
+  priceUpdatedAt!: string | null;
   @ApiPropertyOptional({ type: String, nullable: true }) hsCode!: string | null;
   @ApiPropertyOptional({ type: String, nullable: true, description: 'Primary image URL.' })
   imageUrl!: string | null;
@@ -43,6 +51,7 @@ export class ProductDetailDto extends ProductCardDto {
   @ApiPropertyOptional({ type: String, nullable: true }) description!: string | null;
   @ApiPropertyOptional({ type: String, nullable: true }) standard!: string | null;
   @ApiPropertyOptional({ type: String, nullable: true }) origin!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) priceNote!: string | null;
   @ApiProperty({ type: [ProductSpecDto] }) specs!: ProductSpecDto[];
 }
 
@@ -65,6 +74,15 @@ export class AdminProductDto {
   @ApiProperty({ type: CategoryRefDto }) category!: CategoryRefDto;
   @ApiProperty({ type: RegionRefDto }) region!: RegionRefDto;
   @ApiProperty({ enum: BadgeCode, isArray: true }) badges!: BadgeCode[];
+  @ApiPropertyOptional({ type: String, nullable: true, description: 'Decimal as string.' })
+  priceAmount!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) priceCurrency!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) priceUnit!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true, description: 'Price basis (Incoterm).' })
+  priceBasis!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) priceNote!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true, description: 'ISO date-time.' })
+  priceUpdatedAt!: string | null;
   @ApiProperty() createdAt!: string;
   @ApiProperty() updatedAt!: string;
 }
@@ -91,6 +109,15 @@ export class AdminProductDetailDto {
   @ApiPropertyOptional({ type: String, nullable: true, description: 'Decimal as string.' })
   minOrderQty!: string | null;
   @ApiPropertyOptional({ type: String, nullable: true }) minOrderUnit!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true, description: 'Decimal as string.' })
+  priceAmount!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) priceCurrency!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) priceUnit!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true, description: 'Price basis (Incoterm).' })
+  priceBasis!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) priceNote!: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true, description: 'ISO date-time.' })
+  priceUpdatedAt!: string | null;
   @ApiPropertyOptional({ type: String, nullable: true }) shortDescription!: string | null;
   @ApiPropertyOptional({ type: String, nullable: true }) description!: string | null;
   @ApiPropertyOptional({ type: String, nullable: true, description: 'Primary image URL.' })

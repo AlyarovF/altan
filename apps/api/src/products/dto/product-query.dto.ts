@@ -33,6 +33,14 @@ export class ProductQueryDto extends PaginationQueryDto {
   @IsBooleanString()
   featured?: string;
 
+  @ApiPropertyOptional({
+    description: 'Only products with an indicative price (priceAmount set).',
+    example: 'true',
+  })
+  @IsOptional()
+  @IsBooleanString()
+  priced?: string;
+
   @ApiPropertyOptional({ enum: BadgeCode, description: 'Filter by badge.' })
   @IsOptional()
   @IsIn(Object.values(BadgeCode))

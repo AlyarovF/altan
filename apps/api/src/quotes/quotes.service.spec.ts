@@ -61,7 +61,7 @@ const baseItems = [
     productId: null,
     productNameSnapshot: 'X',
     quantity: { toString: () => '5' },
-    unit: 'MTU',
+    unit: 'mtu',
     notes: null,
   },
 ];
@@ -91,7 +91,7 @@ describe('QuotesService', () => {
         country: 'DE',
         incoterm: 'CIF',
         destination: 'Hamburg',
-        items: [{ productName: 'X', quantity: 5, unit: 'MTU' }],
+        items: [{ productName: 'X', quantity: 5, unit: 'mtu' }],
       });
 
       expect(res.ref).toMatch(/^ALT-\d{4}-000001$/);

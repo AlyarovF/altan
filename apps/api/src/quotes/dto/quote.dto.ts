@@ -15,7 +15,7 @@ import {
   ValidateIf,
   ValidateNested,
 } from 'class-validator';
-import { Incoterm, INCOTERMS, QuoteSource, QuoteStatus } from '@altan/shared';
+import { Incoterm, INCOTERMS, QuoteSource, QuoteStatus, UNITS, type Unit } from '@altan/shared';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
 export class QuoteItemInputDto {
@@ -25,7 +25,7 @@ export class QuoteItemInputDto {
   @IsNumber()
   @Min(0.000001)
   quantity!: number;
-  @ApiProperty({ maxLength: 20 }) @IsString() @IsNotEmpty() unit!: string;
+  @ApiProperty({ enum: UNITS }) @IsIn(UNITS) unit!: Unit;
   @ApiPropertyOptional() @IsOptional() @IsString() notes?: string;
 }
 

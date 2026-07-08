@@ -15,7 +15,15 @@ import {
   Min,
   ValidateNested,
 } from 'class-validator';
-import { BadgeCode, ProductStatus } from '@altan/shared';
+import {
+  BadgeCode,
+  Currency,
+  INCOTERMS,
+  ProductStatus,
+  UNITS,
+  type Incoterm,
+  type Unit,
+} from '@altan/shared';
 
 export class ProductSpecInputDto {
   @ApiProperty() @IsString() @IsNotEmpty() label!: string;
@@ -57,7 +65,34 @@ export class CreateProductDto {
   @Min(0)
   minOrderQty?: number;
 
-  @ApiPropertyOptional() @IsOptional() @IsString() minOrderUnit?: string;
+  @ApiPropertyOptional({ enum: UNITS }) @IsOptional() @IsIn(UNITS) minOrderUnit?: Unit;
+
+  @ApiPropertyOptional({ description: 'Indicative per-unit price (decimal).' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  priceAmount?: number;
+
+  @ApiPropertyOptional({ enum: Currency })
+  @IsOptional()
+  @IsEnum(Currency)
+  priceCurrency?: Currency;
+
+  @ApiPropertyOptional({ enum: UNITS, description: 'Price unit, e.g. MT, kg, mtu.' })
+  @IsOptional()
+  @IsIn(UNITS)
+  priceUnit?: Unit;
+
+  @ApiPropertyOptional({ enum: INCOTERMS, description: 'Price basis (Incoterm), e.g. FCA.' })
+  @IsOptional()
+  @IsIn(INCOTERMS)
+  priceBasis?: Incoterm;
+
+  @ApiPropertyOptional({ description: 'Free-text price note, e.g. "FCA Tashkent, min 5 MT".' })
+  @IsOptional()
+  @IsString()
+  priceNote?: string;
+
   @ApiPropertyOptional() @IsOptional() @IsString() shortDescription?: string;
   @ApiPropertyOptional() @IsOptional() @IsString() description?: string;
   @ApiPropertyOptional({ description: 'Primary image URL (from POST /admin/media or external).' })
@@ -103,7 +138,34 @@ export class UpdateProductDto {
   @ApiPropertyOptional() @IsOptional() @IsString() standard?: string;
   @ApiPropertyOptional() @IsOptional() @IsString() origin?: string;
   @ApiPropertyOptional() @IsOptional() @IsNumber() @Min(0) minOrderQty?: number;
-  @ApiPropertyOptional() @IsOptional() @IsString() minOrderUnit?: string;
+  @ApiPropertyOptional({ enum: UNITS }) @IsOptional() @IsIn(UNITS) minOrderUnit?: Unit;
+
+  @ApiPropertyOptional({ description: 'Indicative per-unit price (decimal).' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  priceAmount?: number;
+
+  @ApiPropertyOptional({ enum: Currency })
+  @IsOptional()
+  @IsEnum(Currency)
+  priceCurrency?: Currency;
+
+  @ApiPropertyOptional({ enum: UNITS, description: 'Price unit, e.g. MT, kg, mtu.' })
+  @IsOptional()
+  @IsIn(UNITS)
+  priceUnit?: Unit;
+
+  @ApiPropertyOptional({ enum: INCOTERMS, description: 'Price basis (Incoterm), e.g. FCA.' })
+  @IsOptional()
+  @IsIn(INCOTERMS)
+  priceBasis?: Incoterm;
+
+  @ApiPropertyOptional({ description: 'Free-text price note, e.g. "FCA Tashkent, min 5 MT".' })
+  @IsOptional()
+  @IsString()
+  priceNote?: string;
+
   @ApiPropertyOptional() @IsOptional() @IsString() shortDescription?: string;
   @ApiPropertyOptional() @IsOptional() @IsString() description?: string;
   @ApiPropertyOptional({ description: 'Primary image URL (from POST /admin/media or external).' })

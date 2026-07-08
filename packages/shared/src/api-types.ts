@@ -923,6 +923,14 @@ export interface components {
       /** @description Decimal as string. */
       minOrderQty?: string | null;
       minOrderUnit?: string | null;
+      /** @description Decimal as string. */
+      priceAmount?: string | null;
+      priceCurrency?: string | null;
+      priceUnit?: string | null;
+      /** @description Price basis (Incoterm). */
+      priceBasis?: string | null;
+      /** @description ISO date-time. */
+      priceUpdatedAt?: string | null;
       hsCode?: string | null;
       /** @description Primary image URL. */
       imageUrl?: string | null;
@@ -948,6 +956,14 @@ export interface components {
       /** @description Decimal as string. */
       minOrderQty?: string | null;
       minOrderUnit?: string | null;
+      /** @description Decimal as string. */
+      priceAmount?: string | null;
+      priceCurrency?: string | null;
+      priceUnit?: string | null;
+      /** @description Price basis (Incoterm). */
+      priceBasis?: string | null;
+      /** @description ISO date-time. */
+      priceUpdatedAt?: string | null;
       hsCode?: string | null;
       /** @description Primary image URL. */
       imageUrl?: string | null;
@@ -957,6 +973,7 @@ export interface components {
       description?: string | null;
       standard?: string | null;
       origin?: string | null;
+      priceNote?: string | null;
       specs: components['schemas']['ProductSpecDto'][];
     };
     CategoryDto: {
@@ -989,6 +1006,15 @@ export interface components {
       category: components['schemas']['CategoryRefDto'];
       region: components['schemas']['RegionRefDto'];
       badges: ('HOT' | 'NEW')[];
+      /** @description Decimal as string. */
+      priceAmount?: string | null;
+      priceCurrency?: string | null;
+      priceUnit?: string | null;
+      /** @description Price basis (Incoterm). */
+      priceBasis?: string | null;
+      priceNote?: string | null;
+      /** @description ISO date-time. */
+      priceUpdatedAt?: string | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -1018,6 +1044,15 @@ export interface components {
       /** @description Decimal as string. */
       minOrderQty?: string | null;
       minOrderUnit?: string | null;
+      /** @description Decimal as string. */
+      priceAmount?: string | null;
+      priceCurrency?: string | null;
+      priceUnit?: string | null;
+      /** @description Price basis (Incoterm). */
+      priceBasis?: string | null;
+      priceNote?: string | null;
+      /** @description ISO date-time. */
+      priceUpdatedAt?: string | null;
       shortDescription?: string | null;
       description?: string | null;
       /** @description Primary image URL. */
@@ -1064,7 +1099,24 @@ export interface components {
       origin?: string;
       /** @description Minimum order quantity (decimal). */
       minOrderQty?: number;
-      minOrderUnit?: string;
+      /** @enum {string} */
+      minOrderUnit?: 'MT' | 'kg' | 'g' | 'lb' | 'mtu' | 'pcs';
+      /** @description Indicative per-unit price (decimal). */
+      priceAmount?: number;
+      /** @enum {string} */
+      priceCurrency?: 'USD' | 'EUR' | 'CNY' | 'RUB' | 'UZS';
+      /**
+       * @description Price unit, e.g. MT, kg, mtu.
+       * @enum {string}
+       */
+      priceUnit?: 'MT' | 'kg' | 'g' | 'lb' | 'mtu' | 'pcs';
+      /**
+       * @description Price basis (Incoterm), e.g. FCA.
+       * @enum {string}
+       */
+      priceBasis?: 'EXW' | 'FCA' | 'FOB' | 'CFR' | 'CIF' | 'DAP' | 'DDP';
+      /** @description Free-text price note, e.g. "FCA Tashkent, min 5 MT". */
+      priceNote?: string;
       shortDescription?: string;
       description?: string;
       /** @description Primary image URL (from POST /admin/media or external). */
@@ -1098,7 +1150,24 @@ export interface components {
       standard?: string;
       origin?: string;
       minOrderQty?: number;
-      minOrderUnit?: string;
+      /** @enum {string} */
+      minOrderUnit?: 'MT' | 'kg' | 'g' | 'lb' | 'mtu' | 'pcs';
+      /** @description Indicative per-unit price (decimal). */
+      priceAmount?: number;
+      /** @enum {string} */
+      priceCurrency?: 'USD' | 'EUR' | 'CNY' | 'RUB' | 'UZS';
+      /**
+       * @description Price unit, e.g. MT, kg, mtu.
+       * @enum {string}
+       */
+      priceUnit?: 'MT' | 'kg' | 'g' | 'lb' | 'mtu' | 'pcs';
+      /**
+       * @description Price basis (Incoterm), e.g. FCA.
+       * @enum {string}
+       */
+      priceBasis?: 'EXW' | 'FCA' | 'FOB' | 'CFR' | 'CIF' | 'DAP' | 'DDP';
+      /** @description Free-text price note, e.g. "FCA Tashkent, min 5 MT". */
+      priceNote?: string;
       shortDescription?: string;
       description?: string;
       /** @description Primary image URL (from POST /admin/media or external). */
@@ -1259,7 +1328,8 @@ export interface components {
       productId?: string;
       productName: string;
       quantity: number;
-      unit: string;
+      /** @enum {string} */
+      unit: 'MT' | 'kg' | 'g' | 'lb' | 'mtu' | 'pcs';
       notes?: string;
     };
     CreateQuoteRequestDto: {
@@ -1737,6 +1807,8 @@ export interface operations {
         region?: string;
         /** @description Only featured products. */
         featured?: string;
+        /** @description Only products with an indicative price (priceAmount set). */
+        priced?: string;
         /** @description Filter by badge. */
         badge?: 'HOT' | 'NEW';
         /** @description Full-text-ish search over name/grade/description. */
@@ -1861,6 +1933,8 @@ export interface operations {
         region?: string;
         /** @description Only featured products. */
         featured?: string;
+        /** @description Only products with an indicative price (priceAmount set). */
+        priced?: string;
         /** @description Filter by badge. */
         badge?: 'HOT' | 'NEW';
         /** @description Full-text-ish search over name/grade/description. */
