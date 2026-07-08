@@ -8,7 +8,7 @@ import { Link } from '@/i18n/routing';
 import { ProductBadges } from './ProductBadges';
 import { ElementTile } from './ElementTile';
 import { useQuoteModal } from '@/features/quote/QuoteModalContext';
-import { formatMinOrder } from '@/lib/format';
+import { formatMinOrder, formatPrice } from '@/lib/format';
 
 /**
  * Material card — a compact spec sheet. Identity is the element tile (derived
@@ -27,6 +27,7 @@ export function ProductCard({
   const { openQuote } = useQuoteModal();
 
   const minOrder = formatMinOrder(product.minOrderQty, product.minOrderUnit, locale);
+  const price = formatPrice(product.priceAmount, product.priceCurrency, product.priceUnit, locale);
 
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-card border border-steel-200 bg-white shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:border-amber/40 hover:shadow-lift">
@@ -55,6 +56,18 @@ export function ProductCard({
         )}
 
         <dl className="mt-auto grid grid-cols-2 gap-x-4 gap-y-3 border-t border-steel-100 pt-4 text-sm">
+          {/* Price is the buyer's first question — full-width row, heavier type
+              than the other facts (same treatment as the news price signal). */}
+          <div className="col-span-2">
+            <dt className="font-mono text-[10px] uppercase tracking-ticker text-steel-500">
+              {t('common.price')}
+            </dt>
+            {price ? (
+              <dd className="mt-0.5 font-mono text-base font-semibold text-ink">{price}</dd>
+            ) : (
+              <dd className="mt-0.5 text-steel-500">{t('common.priceOnRequest')}</dd>
+            )}
+          </div>
           {minOrder && (
             <div>
               <dt className="font-mono text-[10px] uppercase tracking-ticker text-steel-500">

@@ -17,13 +17,28 @@ import {
 } from 'antd';
 import { PlusOutlined, DeleteOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import { useMutation } from '@tanstack/react-query';
-import { INCOTERMS, quoteRequestSchema, type QuoteRequestInput } from '@altan/shared';
+import {
+  INCOTERMS,
+  UNITS,
+  quoteRequestSchema,
+  type QuoteRequestInput,
+  type Unit,
+} from '@altan/shared';
 import { submitQuoteRequest, normalizeError } from '@/lib/api/client';
 import { useQuoteModal } from './QuoteModalContext';
 
 const { TextArea } = Input;
 
-const EMPTY_ITEM = { productName: '', quantity: undefined as unknown as number, unit: 'kg' };
+const EMPTY_ITEM = {
+  productName: '',
+  quantity: undefined as unknown as number,
+  unit: 'kg' as Unit,
+};
+
+/** Prefill units come from free-form product data — only accept canonical UNITS. */
+function toUnit(unit?: string): Unit {
+  return UNITS.includes(unit as Unit) ? (unit as Unit) : 'kg';
+}
 
 function buildDefaults(prefillName?: string, unit?: string): QuoteRequestInput {
   return {
@@ -37,7 +52,7 @@ function buildDefaults(prefillName?: string, unit?: string): QuoteRequestInput {
     message: '',
     items: [
       prefillName
-        ? { productName: prefillName, quantity: undefined as unknown as number, unit: unit ?? 'kg' }
+        ? { productName: prefillName, quantity: undefined as unknown as number, unit: toUnit(unit) }
         : { ...EMPTY_ITEM },
     ],
   };
@@ -96,6 +111,7 @@ export function QuoteModal() {
   const success = mutation.isSuccess ? mutation.data : null;
 
   const incotermOptions = INCOTERMS.map((code) => ({ value: code, label: code }));
+  const unitOptions = UNITS.map((unit) => ({ value: unit, label: unit }));
 
   return (
     <Modal
@@ -295,7 +311,7 @@ export function QuoteModal() {
                     name={`items.${index}.unit`}
                     render={({ field }) => (
                       <Form.Item className="!mb-0">
-                        <Input {...field} placeholder={t('unit')} />
+                        <Select {...field} options={unitOptions} aria-label={t('unit')} />
                       </Form.Item>
                     )}
                   />

@@ -1,6 +1,7 @@
 {
   "nav": {
     "home": "Bosh sahifa",
+    "prices": "Narxlar",
     "catalog": "Katalog",
     "materials": "Materiallar",
     "capabilities": "Imkoniyatlar",
@@ -26,6 +27,8 @@
     "notFoundBody": "Siz qidirayotgan sahifa mavjud emas yoki koʻchirilgan.",
     "backHome": "Bosh sahifaga",
     "minOrder": "Min. buyurtma",
+    "price": "Indikativ narx",
+    "priceOnRequest": "Narx soʻrov boʻyicha",
     "grade": "Marka",
     "hsCode": "HS kodi",
     "region": "Hudud",
@@ -222,6 +225,9 @@
   },
   "product": {
     "specs": "Texnik xususiyatlar",
+    "priceBasis": "Bazis",
+    "priceUpdated": "Yangilangan",
+    "priceDisclaimer": "Indikativ narx — yakuniy narx RFQ orqali belgilanadi.",
     "standard": "Standart",
     "origin": "Kelib chiqishi",
     "description": "Tavsif",
@@ -231,6 +237,20 @@
       "label": "Xususiyat",
       "value": "Qiymat"
     }
+  },
+  "prices": {
+    "hero": {
+      "eyebrow": "Bozor narxlari",
+      "title": "Indikativ narxlar taxtasi",
+      "lede": "Biz savdo qiladigan materiallar uchun trade-desk eʼlon qilgan indikativ narxlar. Har bir narx yetkazib berish bazisi va yangilangan sana bilan koʻrsatiladi — spetsifikatsiyangiz va yoʻnalishingiz uchun qatʼiy taklif soʻrang."
+    },
+    "material": "Material",
+    "price": "Narx",
+    "basis": "Bazis",
+    "updated": "Yangilangan",
+    "disclaimer": "Narxlar indikativ boʻlib, oferta hisoblanmaydi. Yakuniy narx spetsifikatsiya, hajm, bazis va yoʻnalishga qarab RFQ orqali belgilanadi.",
+    "empty": "Hozircha eʼlon qilingan narxlar yoʻq. Soʻrov yuboring — deskimiz 12 soat ichida javob beradi.",
+    "cta": "Qatʼiy taklif soʻrash"
   },
   "news": {
     "eyebrow": "Bozor tahlili",

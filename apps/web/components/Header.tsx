@@ -13,6 +13,7 @@ import { useQuoteModal } from '@/features/quote/QuoteModalContext';
 
 /** Flat nav links (Materials is a dropdown, handled separately). */
 const NAV = [
+  { href: '/prices', key: 'prices' },
   { href: '/capabilities', key: 'capabilities' },
   { href: '/quality', key: 'quality' },
   { href: '/news', key: 'news' },

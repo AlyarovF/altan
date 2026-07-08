@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ProductStatus } from '@altan/shared';
+import { Currency, INCOTERMS, ProductStatus, UNITS } from '@altan/shared';
 
 /**
  * Product form schema (RHF + zod). Mirrors CreateProductDto/UpdateProductDto from
@@ -42,7 +42,12 @@ export const productFormSchema = z
     standard: z.string().max(120).optional().or(z.literal('')),
     origin: z.string().max(120).optional().or(z.literal('')),
     minOrderQty: z.number().positive('Must be > 0').optional().nullable(),
-    minOrderUnit: z.string().max(40).optional().or(z.literal('')),
+    minOrderUnit: z.enum(UNITS).optional().or(z.literal('')),
+    priceAmount: z.number().positive('Must be > 0').optional().nullable(),
+    priceCurrency: z.nativeEnum(Currency).optional().or(z.literal('')),
+    priceUnit: z.enum(UNITS).optional().or(z.literal('')),
+    priceBasis: z.enum(INCOTERMS).optional().or(z.literal('')),
+    priceNote: z.string().max(500).optional().or(z.literal('')),
     shortDescription: z.string().max(500).optional().or(z.literal('')),
     description: z.string().max(8000).optional().or(z.literal('')),
     imageUrl: z
@@ -60,6 +65,23 @@ export const productFormSchema = z
     uz: localeFieldsSchema,
   })
   .superRefine((val, ctx) => {
+    // A price amount must always carry a currency and a unit (API rejects otherwise).
+    if (val.priceAmount != null) {
+      if (!val.priceCurrency) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['priceCurrency'],
+          message: 'Currency is required when a price is set',
+        });
+      }
+      if (!val.priceUnit) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['priceUnit'],
+          message: 'Unit is required when a price is set',
+        });
+      }
+    }
     if (val.status === ProductStatus.PUBLISHED) {
       if (!val.grade) {
         ctx.addIssue({

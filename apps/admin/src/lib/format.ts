@@ -14,6 +14,23 @@ export function formatDateShort(value?: string | null): string {
   return value ? dayjs(value).format('YYYY-MM-DD') : '—';
 }
 
+/**
+ * Format an indicative product price (decimal-as-string from the API) as
+ * "33,500 USD / MT". Returns "—" when unpriced (no amount or no currency).
+ */
+export function formatPrice(
+  amount?: string | null,
+  currency?: string | null,
+  unit?: string | null,
+): string {
+  if (!amount || !currency) return '—';
+  const n = Number(amount);
+  const value = Number.isFinite(n)
+    ? new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(n)
+    : amount;
+  return `${value} ${currency}${unit ? ` / ${unit}` : ''}`;
+}
+
 export type SlaState = 'met' | 'overdue' | 'due' | 'none';
 
 export interface SlaInfo {

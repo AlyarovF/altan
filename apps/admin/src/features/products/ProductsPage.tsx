@@ -27,7 +27,7 @@ import { QueryState } from '@/components/QueryState';
 import { usePermission } from '@/components/Can';
 import { qk } from '@/lib/queryClient';
 import { normalizeError } from '@/lib/api/client';
-import { formatDateShort } from '@/lib/format';
+import { formatDateShort, formatPrice } from '@/lib/format';
 import { ROW_ACTION_HIT } from '@/lib/ui';
 import { useCategories, useRegions } from '@/features/taxonomy/hooks';
 import { productsApi, type ProductListParams } from './api';
@@ -102,6 +102,18 @@ export function ProductsPage() {
         dataIndex: 'badges',
         render: (b: string[]) => b.map((x) => <Tag key={x}>{x}</Tag>),
         responsive: ['lg'],
+      },
+      {
+        title: 'Price',
+        key: 'price',
+        render: (_, r) =>
+          r.priceAmount ? (
+            <span className="font-mono">
+              {formatPrice(r.priceAmount, r.priceCurrency, r.priceUnit)}
+            </span>
+          ) : (
+            '—'
+          ),
       },
       {
         title: 'Featured',

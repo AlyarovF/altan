@@ -7,7 +7,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { fetchProduct, fetchBadges } from '@/lib/api/catalog';
 import { SITE_URL, resolveMediaUrl } from '@/lib/env';
-import { formatMinOrder } from '@/lib/format';
+import { formatMinOrder, formatPrice } from '@/lib/format';
 import { ProductBadges } from '@/components/ProductBadges';
 import { QuoteButton } from '@/components/QuoteButton';
 
@@ -47,6 +47,15 @@ export default async function ProductDetailPage({ params: { locale, slug } }: Pa
   const minOrder = formatMinOrder(product.minOrderQty, product.minOrderUnit, locale);
   const imageUrl = resolveMediaUrl(product.imageUrl);
 
+  // Indicative price — formatPrice returns null unless amount + currency are set.
+  const price = formatPrice(product.priceAmount, product.priceCurrency, product.priceUnit, locale);
+  const priceBasis = [product.priceBasis, product.priceNote].filter(Boolean).join(' · ');
+  const priceUpdated = product.priceUpdatedAt
+    ? new Intl.DateTimeFormat(locale, { dateStyle: 'medium' }).format(
+        new Date(product.priceUpdatedAt),
+      )
+    : null;
+
   // JSON-LD Product for rich results.
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -58,6 +67,24 @@ export default async function ProductDetailPage({ params: { locale, slug } }: Pa
     brand: { '@type': 'Brand', name: 'ALTAN Trading House' },
     ...(product.origin ? { countryOfOrigin: product.origin } : {}),
     url: `${SITE_URL}/${locale}/catalog/${product.slug}`,
+    // Offer emitted only when the product carries an indicative price. `unitText`
+    // (not `unitCode`) — there is no clean UN/CEFACT mapping for "mtu".
+    ...(price && product.priceAmount && product.priceCurrency
+      ? {
+          offers: {
+            '@type': 'Offer',
+            price: product.priceAmount,
+            priceCurrency: product.priceCurrency,
+            priceSpecification: {
+              '@type': 'UnitPriceSpecification',
+              price: product.priceAmount,
+              priceCurrency: product.priceCurrency,
+              ...(product.priceUnit ? { unitText: product.priceUnit } : {}),
+            },
+            availability: 'https://schema.org/InStock',
+          },
+        }
+      : {}),
   };
 
   const facts: Array<{ label: string; value: string }> = [];
@@ -172,6 +199,31 @@ export default async function ProductDetailPage({ params: { locale, slug } }: Pa
 
         <aside className="min-w-0 lg:sticky lg:top-24 lg:self-start">
           <div className="rounded-xl border border-steel-200 bg-white p-6 shadow-card">
+            {/* Indicative price — the buyer's first question, so it leads the facts
+                panel with the heavy mono treatment used across price signals. */}
+            <div className="mb-5 border-b border-steel-100 pb-5">
+              <p className="font-mono text-[10px] uppercase tracking-ticker text-steel-500">
+                {tc('price')}
+              </p>
+              {price ? (
+                <>
+                  <p className="mt-1 font-mono text-2xl font-semibold text-ink">{price}</p>
+                  {priceBasis && (
+                    <p className="mt-1.5 text-sm text-steel-600">
+                      {t('priceBasis')}: <span className="font-medium">{priceBasis}</span>
+                    </p>
+                  )}
+                  {priceUpdated && (
+                    <p className="mt-0.5 text-sm text-steel-500">
+                      {t('priceUpdated')}: {priceUpdated}
+                    </p>
+                  )}
+                  <p className="mt-2 text-xs text-steel-500">{t('priceDisclaimer')}</p>
+                </>
+              ) : (
+                <p className="mt-1 text-base font-medium text-steel-600">{tc('priceOnRequest')}</p>
+              )}
+            </div>
             <Descriptions
               column={1}
               size="small"

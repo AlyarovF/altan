@@ -1,6 +1,7 @@
 {
   "nav": {
     "home": "Home",
+    "prices": "Prices",
     "catalog": "Catalog",
     "materials": "Materials",
     "capabilities": "Capabilities",
@@ -26,6 +27,8 @@
     "notFoundBody": "The page you are looking for does not exist or has moved.",
     "backHome": "Back to home",
     "minOrder": "Min. order",
+    "price": "Indicative price",
+    "priceOnRequest": "Price on request",
     "grade": "Grade",
     "hsCode": "HS code",
     "region": "Region",
@@ -322,6 +325,9 @@
   },
   "product": {
     "specs": "Specifications",
+    "priceBasis": "Basis",
+    "priceUpdated": "Updated",
+    "priceDisclaimer": "Indicative price — final pricing via RFQ.",
     "standard": "Standard",
     "origin": "Origin",
     "description": "Description",
@@ -331,6 +337,20 @@
       "label": "Property",
       "value": "Value"
     }
+  },
+  "prices": {
+    "hero": {
+      "eyebrow": "Market prices",
+      "title": "Indicative price board",
+      "lede": "Desk-published indicative prices for the materials we trade. Every figure carries its delivery basis and last update — request a firm quote for your specification and destination."
+    },
+    "material": "Material",
+    "price": "Price",
+    "basis": "Basis",
+    "updated": "Updated",
+    "disclaimer": "Prices are indicative desk levels, not binding offers. Final pricing is set per specification, quantity, incoterm and destination via RFQ.",
+    "empty": "No published prices at the moment. Request a quote and our desk will respond within 12 hours.",
+    "cta": "Request a firm quote"
   },
   "news": {
     "eyebrow": "Market intelligence",

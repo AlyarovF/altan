@@ -14,6 +14,8 @@ export interface ProductFilters {
   category?: string;
   region?: string;
   featured?: boolean;
+  /** Only products with a published indicative price (basis + updatedAt on each card). */
+  priced?: boolean;
   badge?: string;
   q?: string;
   sort?: string;
@@ -29,6 +31,7 @@ export function fetchProducts(filters: ProductFilters): Promise<Paginated<Produc
       category: filters.category,
       region: filters.region,
       featured: filters.featured ? 'true' : undefined,
+      priced: filters.priced ? 'true' : undefined,
       badge: filters.badge,
       q: filters.q,
       sort: filters.sort,

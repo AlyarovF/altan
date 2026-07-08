@@ -3,6 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Button,
+  Divider,
   Drawer,
   Form,
   Image,
@@ -19,7 +20,7 @@ import {
 import { UploadOutlined } from '@ant-design/icons';
 import type { UploadProps } from 'antd';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ProductStatus } from '@altan/shared';
+import { CURRENCIES, INCOTERMS, ProductStatus, UNITS } from '@altan/shared';
 import { qk } from '@/lib/queryClient';
 import { normalizeError } from '@/lib/api/client';
 import { resolveMediaUrl } from '@/lib/env';
@@ -45,6 +46,11 @@ const defaultValues: ProductFormValues = {
   origin: '',
   minOrderQty: null,
   minOrderUnit: '',
+  priceAmount: null,
+  priceCurrency: '',
+  priceUnit: '',
+  priceBasis: '',
+  priceNote: '',
   shortDescription: '',
   description: '',
   imageUrl: '',
@@ -112,7 +118,14 @@ export function ProductFormDrawer({ open, product, onClose }: Props) {
       standard: detail.standard ?? '',
       origin: detail.origin ?? '',
       minOrderQty: detail.minOrderQty != null ? Number(detail.minOrderQty) : null,
-      minOrderUnit: detail.minOrderUnit ?? '',
+      // Stored enum-ish fields arrive as plain strings from the contract; the zod
+      // schema re-validates them against UNITS/CURRENCIES/INCOTERMS on submit.
+      minOrderUnit: (detail.minOrderUnit ?? '') as ProductFormValues['minOrderUnit'],
+      priceAmount: detail.priceAmount != null ? Number(detail.priceAmount) : null,
+      priceCurrency: (detail.priceCurrency ?? '') as ProductFormValues['priceCurrency'],
+      priceUnit: (detail.priceUnit ?? '') as ProductFormValues['priceUnit'],
+      priceBasis: (detail.priceBasis ?? '') as ProductFormValues['priceBasis'],
+      priceNote: detail.priceNote ?? '',
       shortDescription: detail.shortDescription ?? '',
       description: detail.description ?? '',
       imageUrl: detail.imageUrl ?? '',
@@ -219,6 +232,14 @@ export function ProductFormDrawer({ open, product, onClose }: Props) {
   );
 }
 
+/**
+ * The PATCH contract distinguishes explicit `null` ("clear the stored value")
+ * from `undefined`/absent ("keep it"). The generated write types don't model
+ * nullable fields, so we cast the intentional null once here — without it,
+ * clearing a price or min-order in the form would silently keep the old value.
+ */
+const CLEARED = null as unknown as undefined;
+
 /** Map form values → CreateProductDto/UpdateProductDto. */
 function toPayload(v: ProductFormValues, sortOrder: number): CreateProductInput {
   const translations = [
@@ -244,8 +265,13 @@ function toPayload(v: ProductFormValues, sortOrder: number): CreateProductInput 
     hsCode: v.hsCode || undefined,
     standard: v.standard || undefined,
     origin: v.origin || undefined,
-    minOrderQty: v.minOrderQty ?? undefined,
-    minOrderUnit: v.minOrderUnit || undefined,
+    minOrderQty: v.minOrderQty ?? CLEARED,
+    minOrderUnit: v.minOrderUnit || CLEARED,
+    priceAmount: v.priceAmount ?? CLEARED,
+    priceCurrency: (v.priceCurrency || CLEARED) as CreateProductInput['priceCurrency'],
+    priceUnit: v.priceUnit || CLEARED,
+    priceBasis: v.priceBasis || CLEARED,
+    priceNote: v.priceNote || CLEARED,
     shortDescription: v.shortDescription || undefined,
     description: v.description || undefined,
     imageUrl: v.imageUrl || undefined,
@@ -386,7 +412,89 @@ function CoreFields({
           <Controller
             control={control}
             name="minOrderUnit"
-            render={({ field }) => <Input {...field} placeholder="kg" />}
+            render={({ field }) => (
+              <Select
+                {...field}
+                value={field.value || undefined}
+                allowClear
+                placeholder="kg"
+                options={UNITS.map((u) => ({ value: u, label: u }))}
+              />
+            )}
+          />
+        </Form.Item>
+      </Space>
+      <Divider orientation="left" plain>
+        Indicative pricing
+      </Divider>
+      <Space className="w-full" size="middle" styles={{ item: { flex: 1 } }}>
+        <Form.Item label="Price amount" {...err(errors.priceAmount)} className="flex-1">
+          <Controller
+            control={control}
+            name="priceAmount"
+            render={({ field }) => (
+              <InputNumber
+                {...field}
+                value={field.value ?? undefined}
+                min={0}
+                className="w-full"
+                placeholder="33500"
+              />
+            )}
+          />
+        </Form.Item>
+        <Form.Item label="Currency" {...err(errors.priceCurrency)} className="flex-1">
+          <Controller
+            control={control}
+            name="priceCurrency"
+            render={({ field }) => (
+              <Select
+                {...field}
+                value={field.value || undefined}
+                allowClear
+                placeholder="USD"
+                options={CURRENCIES.map((c) => ({ value: c, label: c }))}
+              />
+            )}
+          />
+        </Form.Item>
+        <Form.Item label="Price unit" {...err(errors.priceUnit)} className="flex-1">
+          <Controller
+            control={control}
+            name="priceUnit"
+            render={({ field }) => (
+              <Select
+                {...field}
+                value={field.value || undefined}
+                allowClear
+                placeholder="MT"
+                options={UNITS.map((u) => ({ value: u, label: u }))}
+              />
+            )}
+          />
+        </Form.Item>
+      </Space>
+      <Space className="w-full" size="middle" styles={{ item: { flex: 1 } }}>
+        <Form.Item label="Basis (Incoterm)" {...err(errors.priceBasis)} className="flex-1">
+          <Controller
+            control={control}
+            name="priceBasis"
+            render={({ field }) => (
+              <Select
+                {...field}
+                value={field.value || undefined}
+                allowClear
+                placeholder="FCA"
+                options={INCOTERMS.map((i) => ({ value: i, label: i }))}
+              />
+            )}
+          />
+        </Form.Item>
+        <Form.Item label="Price note" {...err(errors.priceNote)} className="flex-1">
+          <Controller
+            control={control}
+            name="priceNote"
+            render={({ field }) => <Input {...field} placeholder="FCA Tashkent, min 5 MT" />}
           />
         </Form.Item>
       </Space>
